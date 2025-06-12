@@ -1,0 +1,3490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小羽一键宏</title>
+    <style>
+        :root {
+            --waring-color: #ff0000;
+            --primary-color: #ffffff;
+            --secondary-color: #2c2c2c;
+            --accent-color: #ff0000;
+            --light-bg: #ffffff;
+            --border-color: #4e4e4e;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--light-bg);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0;
+            background-image: url('https://th.bing.com/th/id/R.5d894d08a1bfa29eb5162232f34990bf?rik=p523iQPvq3725g&riu=http%3a%2f%2fp17.qhimg.com%2fbdr%2f__85%2ft013c25b2b7adb63e08.jpg&ehk=UkJRB415ua3AWoB%2fMNPM%2bwBJrZTplbdi3291EmRgp8M%3d&risl=&pid=ImgRaw&r=0');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+
+        /* 新增导航栏样式 */
+        .navbar {
+            display: flex;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin: 20px;
+        }
+
+        .nav-item {
+            color: var(--primary-color);
+            padding: 8px 15px;
+            margin-right: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-item.active {
+            background-color: var(--accent-color);
+        }
+
+        /* 新增内容区域样式 */
+        .content-section {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin: 20px;
+            padding: 30px;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .header-image {
+            height: 110px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+            border-radius: 8px;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin: 20px;
+            padding: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 36px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: var(--light-bg);
+            margin-bottom: 5px;
+        }
+
+        .contact {
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-top: 35px;
+            font-size: 22px;
+        }
+
+        h3 {
+            color: var(--waring-color);
+            height: 60px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            font-size: 20px;
+        }
+
+        h4 {
+            color: var(--primary-color);
+            margin-top: 20px;
+            font-size: 20px;
+        }
+
+        ol {
+            padding-left: 20px;
+        }
+
+        ol li {
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: rgba(0, 0, 0, 0.1);
+            font-weight: 600;
+            color: var(--light-bg);
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .program-section {
+            margin-bottom: 35px;
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .program-title {
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--light-bg);
+        }
+
+        .program-desc {
+            margin-bottom: 18px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--light-bg);
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .download-link {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .download-link:hover {
+            background-color: #dadada;
+            text-decoration: none;
+        }
+
+        .view-link {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .view-link:hover {
+            background-color: #dadada;
+            text-decoration: none;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px 0;
+            color: var(--light-bg);
+            font-size: 14px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* 新增按钮样式 */
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .program-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-height: 120px;
+            border: 1px solid var(--border-color);
+        }
+
+        .program-button:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .program-button h3 {
+            margin: 0;
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .program-button p {
+            margin: 10px 0 0;
+            font-size: 14px;
+            color: var(--light-bg);
+        }
+
+        /* 详情页样式 */
+        .detail-container {
+            display: none;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 15px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .back-button:hover {
+            background-color: #dadada;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 新增导航栏 -->
+    <div class="navbar">
+        <div class="nav-item active" onclick="showSection('home')">首页</div>
+        <div class="nav-item" onclick="showSection('price')">价格列表</div>
+        <div class="nav-item" onclick="showSection('download')">插件下载</div>
+        <div class="nav-item" onclick="showSection('log')">更新日志</div>
+        <div class="nav-item" onclick="showSection('tel')">联系方式</div>
+    </div>
+
+    <div class="header-image">
+        <h3>请低调使用，不要截图或录屏外传，一经发现将直接封禁卡密和IP。</h3>
+    </div>
+
+    <!-- 新增首页内容 -->
+    <div class="content-section active" id="home-content">
+        <h1>小羽一键宏</h1>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1、小羽一键宏（以下简称小羽）网站提供各类一键宏软件及插件的下载与更新等，仅供学习交流使用，禁止用于任何商业用途或非法用途。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2、本网站中所提供的软件及插件著作权归软件作者所有，用户可以自由选择是否使用此软件及插件。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            3、如果用户下载、安装、使用本网站中所提供的软件及插件，即表明用户信任该软件作者，已对程序及插件具有清晰的认知，小羽对任何原因在使用软件及插件过程中可能对用户自己或他人造成的任何形式的损失和伤害不承担责任。</p>
+
+        <h2>【W1】猪猪一键宏</h2>
+        <li>支持全职业T和DPS</li>
+        <li>副本特化功能</li>
+        <li>一键输出及爆发</li>
+        <li>多职业及近战玩家首选</li>
+        <h2>【W2】小易循环助手</h2>
+        <li>支持全职业DPS</li>
+        <li>副本特化功能</li>
+        <li>一键输出及爆发</li>
+        <li>自动走位</li>
+        <li>法系玩家首选</li>
+        <h2>【W3】AutoHelp</h2>
+        <li>支持全职业T、N、DPS</li>
+        <li>副本特化功能</li>
+        <li>支持多开</li>
+        <li>自动跟随</li>
+        <li>多开及治疗玩家首选</li>
+        <h2>【W4】FK内存宏</h2>
+        <li>支持全职业T、N、DPS</li>
+        <li>副本特化功能</li>
+        <li>支持后台运行</li>
+        <li>0ms响应速度</li>
+        <li>带绘图功能</li>
+        <li>高端玩家首选</li>
+        <h2>【Z1】HekiliAssist</h2>
+        <li>支持全职业T和DPS</li>
+        <li>一键输出及爆发</li>
+        <li>可自定义技能条件及优先级</li>
+        <li>可将SIMC数据直接导入并使用</li>
+        <li>适合对职业有一定理解的玩家</li>
+        <h2>【Z2】Think雷鸡</h2>
+        <li>支持全职业T、N、DPS</li>
+        <li>一键输出及爆发</li>
+        <li>无需任何调试</li>
+        <li>操作简单易上手</li>
+    </div>
+
+    <!-- 新增价格内容 -->
+    <div class="content-section" id="price-content">
+        <table>
+            <h2>【W1】猪猪一键宏</h2>
+            <tr>
+                <th>职业</th>
+                <th>周卡</th>
+                <th>月卡</th>
+                <th>季卡</th>
+                <th>半年</th>
+                <th>一年</th>
+                <th>永久</th>
+            </tr>
+            <tr>
+                <td>全职业</td>
+                <td>30</td>
+                <td>88</td>
+                <td>228</td>
+                <td>388</td>
+                <td>658</td>
+                <td>1688</td>
+            </tr>
+        </table>
+
+        <table>
+            <h2>【W2】小易循环助手</h2>
+            <tbody>
+                <tr>
+                    <th>职业</th>
+                    <th>周卡</th>
+                    <th>月卡</th>
+                    <th>季卡</th>
+                    <th>半年</th>
+                    <th>一年</th>
+                    <th>永久</th>
+                </tr>
+                <tr>
+                    <td>术士</td>
+                    <td>34</td>
+                    <td>68</td>
+                    <td>180</td>
+                    <td>300</td>
+                    <td>500</td>
+                    <td>无</td>
+                </tr>
+                <tr>
+                    <td>法师</td>
+                    <td>34</td>
+                    <td>68</td>
+                    <td>180</td>
+                    <td>300</td>
+                    <td>500</td>
+                    <td>无</td>
+                </tr>
+                <tr>
+                    <td>牧师</td>
+                    <td>34</td>
+                    <td>68</td>
+                    <td>180</td>
+                    <td>300</td>
+                    <td>500</td>
+                    <td>无</td>
+                </tr>
+                <tr>
+                    <td>猎人</td>
+                    <td>34</td>
+                    <td>68</td>
+                    <td>180</td>
+                    <td>300</td>
+                    <td>500</td>
+                    <td>无</td>
+                </tr>
+                <tr>
+                    <td>小德</td>
+                    <td>34</td>
+                    <td>68</td>
+                    <td>180</td>
+                    <td>300</td>
+                    <td>500</td>
+                    <td>无</td>
+                </tr>
+                <tr>
+                    <td>骑士</td>
+                    <td>25</td>
+                    <td>50</td>
+                    <td>130</td>
+                    <td>220</td>
+                    <td>360</td>
+                    <td>无</td>
+                </tr>
+                <tr>
+                    <td>战士</td>
+                    <td>25</td>
+                    <td>50</td>
+                    <td>130</td>
+                    <td>220</td>
+                    <td>360</td>
+                    <td>无</td>
+                </tr>
+                <tr>
+                    <td>萨满</td>
+                    <td>25</td>
+                    <td>50</td>
+                    <td>130</td>
+                    <td>220</td>
+                    <td>360</td>
+                    <td>无</td>
+                </tr>
+                <tr>
+                    <td>盗贼</td>
+                    <td>开</td>
+                    <td>发</td>
+                    <td>测</td>
+                    <td>试</td>
+                    <td>中</td>
+                    <td>！</td>
+                </tr>
+                <tr>
+                    <td>DK</td>
+                    <td>开</td>
+                    <td>发</td>
+                    <td>测</td>
+                    <td>试</td>
+                    <td>中</td>
+                    <td>！</td>
+                </tr>
+                <tr>
+                    <td>全职业</td>
+                    <td>90</td>
+                    <td>180</td>
+                    <td>400</td>
+                    <td>680</td>
+                    <td>1200</td>
+                    <td>无</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <h2>【W3】AutoHelp</h2>
+            <tbody>
+                <tr>
+                    <th>职业</th>
+                    <th>周卡</th>
+                    <th>月卡</th>
+                    <th>季卡</th>
+                    <th>半年</th>
+                    <th>一年</th>
+                    <th>永久</th>
+                </tr>
+                <tr>
+                    <td>全职业</td>
+                    <td>30</td>
+                    <td>118</td>
+                    <td>315</td>
+                    <td>580</td>
+                    <td>1000</td>
+                    <td>2680</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <h2>【W4】FK内存宏</h2>
+            <tbody>
+                <tr>
+                    <th>职业</th>
+                    <th>周卡</th>
+                    <th>月卡</th>
+                    <th>季卡</th>
+                    <th>半年</th>
+                    <th>一年</th>
+                    <th>永久</th>
+                </tr>
+                <tr>
+                    <td>全职业</td>
+                    <td>无</td>
+                    <td>270</td>
+                    <td>无</td>
+                    <td>无</td>
+                    <td>无</td>
+                    <td>无</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <h2>【Z1】HekiliAssist</h2>
+            <tbody>
+                <tr>
+                    <th>职业</th>
+                    <th>周卡</th>
+                    <th>月卡</th>
+                    <th>季卡</th>
+                    <th>半年</th>
+                    <th>一年</th>
+                    <th>永久</th>
+                </tr>
+                <tr>
+                    <td>全职业</td>
+                    <td>20</td>
+                    <td>50</td>
+                    <td>120</td>
+                    <td>200</td>
+                    <td>360</td>
+                    <td>888</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <h2>【Z2】Think雷鸡</h2>
+            <tbody>
+                <tr>
+                    <th>职业</th>
+                    <th>周卡</th>
+                    <th>月卡</th>
+                    <th>季卡</th>
+                    <th>半年</th>
+                    <th>一年</th>
+                    <th>永久</th>
+                </tr>
+                <tr>
+                    <td>全职业</td>
+                    <td>30</td>
+                    <td>99</td>
+                    <td>268</td>
+                    <td>500</td>
+                    <td>888</td>
+                    <td>2188</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 新增下载内容 -->
+    <div class="content-section" id="download-content">
+        <div class="button-container">
+            <div class="program-button" onclick="window.open('https://wwey.lanzouu.com/b00ya5hwgb', '_blank')">
+                <h4>【W1】猪猪一键宏</h4>
+                <p>适用于怀旧服/周年服</p>
+            </div>
+            <div class="program-button" onclick="window.open('https://wwey.lanzouu.com/b00ya5hhdi', '_blank')">
+                <h4>【W2】小易循环助手</h4>
+                <p>适用于怀旧服</p>
+            </div>
+            <div class="program-button" onclick="window.open('https://wwey.lanzouu.com/b00ya5hjbi', '_blank')">
+                <h4>【W3】AutoHelp</h4>
+                <p>适用于怀旧服/周年服</p>
+            </div>
+            <div class="program-button" onclick="window.open('https://wwey.lanzouu.com/b00ya97wnc', '_blank')">
+                <h4>【W4】FK内存宏</h4>
+                <p>适用于怀旧服/周年服</p>
+            </div>
+            <div class="program-button" onclick="window.open('https://wwey.lanzouu.com/b00ya5hlnc', '_blank')">
+                <h4>【Z1】HekiliAssist</h4>
+                <p>适用于正式服</p>
+            </div>
+            <div class="program-button" onclick="window.open('https://wwxf.lanzn.com/Thrilonekey', '_blank')">
+                <h4>【Z2】Think 雷鸡</h4>
+                <p>适用于正式服</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增更新日志 -->
+    <div class="content-section" id="log-content">
+        <div class="button-container">
+            <div class="program-button" onclick="showW1Log()">
+                <h4>【W1】猪猪一键宏</h4>
+                <p>更新日期：6.8</p>
+            </div>
+            <div class="program-button" onclick="showW2Log()">
+                <h4>【W2】小易循环助手</h4>
+                <p>更新日期：6.12</p>
+            </div>
+            <div class="program-button" onclick="showW3Log()">
+                <h4>【W3】AutoHelp</h4>
+                <p>更新日期：6.8</p>
+            </div>
+            <div class="program-button">
+                <h4>【W4】FK内存宏</h4>
+                <p>在线热修</p>
+            </div>
+            <div class="program-button" onclick="window.open('https://github.com/Hekili/hekili/releases', '_blank')">
+                <h4>【Z1】HekiliAssist</h4>
+                <p>更新日期：6.1</p>
+            </div>
+            <div class="program-button">
+                <h4>【Z2】Think 雷鸡</h4>
+                <p>在线热修</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增联系方式 -->
+    <div class="content-section active" id="tel-content">
+        <h2>小羽QQ：</h2>
+        <p>183701599</p>
+    </div>
+
+    <script>
+        // 显示详情页
+        function showDetail(programId) {
+            // 隐藏所有内容区域
+            hideAllSections();
+            // 隐藏所有详情页
+            var details = document.getElementsByClassName('detail-container');
+            for (var i = 0; i < details.length; i++) {
+                details[i].style.display = 'none';
+            }
+            // 显示选中的详情页
+            document.getElementById(programId + '-detail').style.display = 'block';
+            // 更新导航栏状态
+            updateNavActive('');
+        }
+
+        // 返回首页
+        function backToHome() {
+            // 隐藏所有详情页
+            var details = document.getElementsByClassName('detail-container');
+            for (var i = 0; i < details.length; i++) {
+                details[i].style.display = 'none';
+            }
+            // 显示首页内容
+            showSection('home');
+        }
+
+        // 显示内容区域
+        function showSection(sectionId) {
+            // 隐藏所有内容区域
+            hideAllSections();
+            // 显示选中的内容区域
+            document.getElementById(sectionId + '-content').classList.add('active');
+            // 更新导航栏活动状态
+            updateNavActive(sectionId);
+            // 隐藏所有详情页
+            var details = document.getElementsByClassName('detail-container');
+            for (var i = 0; i < details.length; i++) {
+                details[i].style.display = 'none';
+            }
+        }
+
+        // 隐藏所有内容区域
+        function hideAllSections() {
+            var sections = document.getElementsByClassName('content-section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+        }
+
+        // 更新导航栏活动状态
+        function updateNavActive(activeId) {
+            var navItems = document.getElementsByClassName('nav-item');
+            for (var i = 0; i < navItems.length; i++) {
+                navItems[i].classList.remove('active');
+            }
+            // 设置当前活动项
+            if (activeId === 'home') {
+                navItems[0].classList.add('active');
+            } else if (activeId === 'price') {
+                navItems[1].classList.add('active');
+            } else if (activeId === 'download') {
+                navItems[2].classList.add('active');
+            } else if (activeId === 'log') {
+                navItems[3].classList.add('active');
+            } else if (activeId === 'tel') {
+                navItems[4].classList.add('active');
+            }
+        }
+
+        // 初始化：只显示首页
+        window.onload = function () {
+            // 隐藏所有详情页
+            var details = document.getElementsByClassName('detail-container');
+            for (var i = 0; i < details.length; i++) {
+                details[i].style.display = 'none';
+            }
+            // 显示首页
+            showSection('home');
+        }
+
+        // 显示更新日志
+        function showW1Log() {
+            // 保存原始日志内容
+            var originalLogContent = document.getElementById('log-content').innerHTML;
+
+            // 创建临时显示内容
+            var tempContent = `
+        <div style="position: relative; min-height: 300px;">
+            <button onclick="window.showSection('log'); restoreLogContent();"
+                    style="position: absolute; top: 10px; right: 10px; padding: 8px 15px; 
+                           background-color: #2c2c2c; color: white; border: none; 
+                           border-radius: 4px; cursor: pointer;">返回</button>
+            <div style="color:white; padding:50px;">
+                <h2>【W1】猪猪一键宏更新日志</h2>
+<p>2025.6.8<p>
+<p>双手邪1.9</p>
+<p>修复一个身上带尸尘会卡宝宝召唤问题</p>
+<p>2025.6.7</p>
+<p>骑士3.4</p>
+<p>其实的取消橙斧特效从强制改为控制开关控制.默认取消.</p>
+<p>2025.6.7</p>
+<p>法师8.4</p>
+<p>修复一个目标太远看不到血条无法触发活体炸弹快炸的炎爆的bug(现在可以通过血条.目标,焦点.指向来判断这个炎爆.有其一即可)</p>
+<p>修复一个近距离打2+1刚好触发饰品吞炎爆的bug</p>
+<p>2025.6.7</p>
+<p>法师8.3</p>
+<p>优化了一下教授隐身.</p>
+<p>增加一个冰龙的冰墓隐身(待测试.别去人堆玩)</p>
+<p>2025.6.6</p>
+<p>dkt团本2.1</p>
+<p>小本1.5</p>
+<p>修复镜像传染问题</p>
+<p>2025.6.5</p>
+<p>战士3.6</p>
+<p>狂暴战增加一个群嘲插入开关</p>
+<p>增加一个反击风暴插入开关.</p>
+<p>2个开关可以做到一个宏里.毛血兽</p>
+<p>2025.6.5</p>
+<p>盗贼3.5</p>
+<p>嫁祸修改为50能量以下才会放</p>
+<p>2025.6.5</p>
+<p>盗贼3.4</p>
+<p>优化破甲功能.不再会被教授的高达的破甲卡循环</p>
+<p>2025.6.5</p>
+<p>法师8.2</p>
+<p>优化一个大小括号触发饰品开燃烧的小细节</p>
+<p>2025.6.5</p>
+<p>痛苦术4.3</p>
+<p>优化了一下新的吸魂逻辑.</p>
+<p>2025.6.5</p>
+<p>法师8.1</p>
+<p>优化了焦点炎爆功能</p>
+<p>2025.6.5</p>
+<p>法师8.0</p>
+<p>修复一个燃烧未使用炎爆不正常问题</p>
+<p>2025.6.5</p>
+<p>法师7.9</p>
+<p>修复一个大括号燃烧问题</p>
+<p>2025.6.4</p>
+<p>法师7.8</p>
+<p>修复一个有炎爆移动会先打火冲相关问题.</p>
+<p>2025.6.4</p>
+<p>痛苦术4.1</p>
+<p>优化了焦点的暗影箭的预计死亡逻辑</p>
+<p>增加一个新的吸魂逻辑控制开关.</p>
+<p>在你下一个吸魂伤害都比现在低的情况下不会补任何技能</p>
+<p>2025.6.4</p>
+<p>牧师3.7</p>
+<p>宝宝食物增加距离判断防止卡主</p>
+<p>2025.6.4</p>
+<p>骑士3.3</p>
+<p>飞盾只留了一个插入功能.取消了自动打断功能</p>
+<p>2025.6.3</p>
+<p>双手邪1.8</p>
+<p>修复了传染问题</p>
+<p>2025.6.2</p>
+<p>邪恶意5.5</p>
+<p>修复巫妖王P1会传染问题.需要传染只能手动插入</p>
+<p>双手邪1.7</p>
+<p>增加手动插入传染开关</p>
+<p>2025.6.2</p>
+<p>法师7.7</p>
+<p>增加老2教派狂热者自动焦点法术偷取功能.只要怪的血条出现在你屏幕里自动上焦点偷取.</p>
+<p>增加老2自动给自己解麻痹诅咒</p>
+<p>2025.6.2</p>
+<p>元素萨2.7</p>
+<p>优化了元素掌握问题</p>
+<p>2025.6.2</p>
+<p>法师7.6</p>
+<p>燃烧期屏蔽了移动火冲功能</p>
+<p>2025.6.1</p>
+<p>野德3.9</p>
+<p>熊的激怒留了个控制开关.自动是无脑开加怒的.有4T10可以自己手动开</p>
+<p>2025.5.31</p>
+<p>增强萨2.0</p>
+<p>增加一个饰品触发自动萨努功能.关联在自动爆发里</p>
+<p>2025.5.31</p>
+<p>法师7.5</p>
+<p>自动爆发的燃烧逻辑从触发饰品小于10秒改为小于15秒就开始为打3+1做准备.更符合icc的饰品.</p>
+<p>原来的10秒饰品逻辑不变</p>
+<p>单触发某buff小于15秒或者双触发</p>
+<p>2025.5.30</p>
+<p>鸟德2.8</p>
+<p>修复指向月火和虫群没有防add功能</p>
+<p>2025.5.30</p>
+<p>野德3.8</p>
+<p>修复一个在改完aoe以后出现的斜掠要45能量才会打问题</p>
+<p>2025.5.30</p>
+<p>法师7.4</p>
+<p>燃烧优化.</p>
+<p>教授全局隐身判定还是不好用.加了个焦点判断.打教授请挂上焦点.</p>
+<p>打断现在默认是关闭状态.</p>
+<p>2025.5.30</p>
+<p>法师7.3</p>
+<p>修复了一个大小括号开启燃烧不跟炎爆问题</p>
+<p>2025.5.30</p>
+<p>法师7.2</p>
+<p>修复了连续触发炎爆导致燃烧延后出饰品触发器无法开启燃烧的bug</p>
+<p>2025.5.29</p>
+<p>法师7.1</p>
+<p>优化了2T10以后的输出逻辑.</p>
+<p>2025.5.29</p>
+<p>盗贼3.3</p>
+<p>破甲增加教授的红绿软判断</p>
+<p>2025.5.29</p>
+<p>牧师3.6</p>
+<p>增加一个大驱散指向插入开关.计数器名字和开关的名字是一样的.随便找个插入宏改一下</p>
+<p>方便进剑驱散灵魂戒卫对友方战友的读条</p>
+<p>2025.5.29</p>
+<p>恶魔术2.6</p>
+<p>增加一个厄运插入开关.</p>
+<p>老2的恶魔变身光环需要周围有2个怪以上</p>
+<p>2025.5.29</p>
+<p>法师7.0</p>
+<p>修复一个前面优化燃烧过程中造成的2T10失效bug</p>
+<p>2025.5.28</p>
+<p>法师6.9</p>
+<p>优化了燃烧问题.</p>
+<p>教授隐身改为全局判断.不需要目标选到教授</p>
+<p>2025.5.28</p>
+<p>dkt团本2.0</p>
+<p>修复一个秒断的bug.</p>
+<p>修复一个黑暗之核被屏蔽的问题</p>
+<p>2025.5.28</p>
+<p>dkt团本1.9</p>
+<p>灵魂收割的时候.魔法盾会和吸血鬼一起开启</p>
+<p>2025.5.27</p>
+<p>骑士3.2</p>
+<p>增加瓦格里的制裁功能.目标或者指向是你选的号码图标.城里木桩可测试</p>
+<p>2025.5.27</p>
+<p>猫德3.7</p>
+<p>修复一个猫德aoe期间身上有咆哮切目标会打裂伤或者其他技能的陈年bug</p>
+<p>2025.5.27</p>
+<p>痛苦术4.0</p>
+<p>毁灭术2.2</p>
+<p>恶魔术2.5</p>
+<p>增加一个甲的切换开关.方便绿龙</p>
+<p>2025.5.27</p>
+<p>暗牧3.5</p>
+<p>优化了一下烂肠的自动消散.在烂肠释放毒气以后自动取消消散.不再等消散读完</p>
+<p>2025.5.27</p>
+<p>双手邪1.6</p>
+<p>优化了一下单目标天鬼结束回红脸逻辑</p>
+<p>2025.5.27</p>
+<p>双手邪1.5</p>
+<p>增加了手套天鬼开完的2分钟CD期判断.</p>
+<p>增加了自动食物</p>
+<p>2025.5.27</p>
+<p>团本1.8</p>
+<p>黑暗之核优先使用大便.</p>
+<p>目标是暗王屏蔽了大便</p>
+<p>2025.5.27</p>
+<p>双手邪1.4</p>
+<p>增加了自动炸弹.</p>
+<p>把秒开天鬼的插入宏改为和邪恶意一致了.</p>
+<p>速度药水开关不会在喝掉药水以后自动关闭了.</p>
+<p>所有职业的炸弹放宽了释放条件.只要是首领就行.放不了通用热力身上不要带.会卡循环</p>
+<p>法师回复了指向冰枪打动力炸弹.</p>
+<p>其他的没改版本号</p>
+<p>2025.5.25</p>
+<p>血输出1.1</p>
+<p>增加多目标传染判断</p>
+<p>2025.5.25</p>
+<p>法师6.8</p>
+<p>优化了插入燃烧.</p>
+<p>2025.5.25</p>
+<p>法师6.7</p>
+<p>优化了燃烧.基本各括号完美燃烧了.暂时没有发现bug</p>
+<p>2025.5.25</p>
+<p>法师6.6</p>
+<p>优化了燃烧的开启时机.</p>
+<p>插入燃烧也会根据小括号,0括号,或者大小括号的规则开启.</p>
+<p>优化了炎爆的优先级.</p>
+<p>增加了烈焰风暴的插入开关(必须做宏.因为是指向法术)</p>
+<p>2025.5.24</p>
+<p>24:50</p>
+<p>双手邪1.3</p>
+<p>修复自动切换目标问题</p>
+<p>2025.5.24</p>
+<p>生存猎3.3</p>
+<p>射击猎3.2</p>
+<p>毒蛇钉刺屏蔽了寒冰之球</p>
+<p>2025.5.24</p>
+<p>法师6.5</p>
+<p>针对教授的自动隐身优化.改为1次和2次可选.自己根据你团队时间轴调整</p>
+<p>2025.5.24</p>
+<p>法师6.4</p>
+<p>修复镜像问题</p>
+<p>2025.5.23</p>
+<p>法师6.3</p>
+<p>优化了一下镜像技能.教授的第二次分身降低到30%开.不然卡着35%的线可能会影响到35%那波隐身.</p>
+<p>2025.5.23</p>
+<p>生存猎3.2</p>
+<p>议会不管你开没开多重开关.只会打瞄准.如果你点了的话</p>
+<p>2025.5.23</p>
+<p>法师6.2</p>
+<p>增加2T10判断.现在默认是关闭.打开以后如果没有冲破极限buff.会优先扔</p>
+<p>2025.5.23</p>
+<p>恶魔术2.4</p>
+<p>目标是灵魂戒卫自动拉回宝宝..灵魂戒卫读条自己按一下拦截(宝宝自动拦截别开.手动按一下)就行.</p>
+<p>2025.5.23</p>
+<p>生存猎3.1</p>
+<p>灵魂戒卫增加自动震荡.自动扔冰霜.自己风筝一下.</p>
+<p>射击猎3.1</p>
+<p>灵魂戒卫不会把沉默当伤害技能打.留起来打断.</p>
+<p>2025.5.23</p>
+<p>骑士3.1</p>
+<p>灵魂戒卫读条自动制裁</p>
+<p>2025.5.23</p>
+<p>增强萨1.9</p>
+<p>解除了小萨的闪电链限制</p>
+<p>2025.5.23</p>
+<p>牧师3.4</p>
+<p>队友目标自动触痛支持5人本</p>
+<p>2025.5.22</p>
+<p>战士3.5</p>
+<p>屏蔽了女王的无损狂怒技能留着解恐惧</p>
+<p>现在强制顺劈可以对屏蔽掉的怪生效.</p>
+<p>2025.5.22</p>
+<p>法师6.1</p>
+<p>队友目标活体支持5人本了</p>
+<p>2025.5.22</p>
+<p>法师6.0</p>
+<p>教授的隐身移到第二次.读条剩0.5秒开始读隐身.不保证能稳定躲过.</p>
+<p>自动隐身留了个开关</p>
+<p>2025.5.22</p>
+<p>邪恶意魔印5.4</p>
+<p>优化了一下小怪传染逻辑.</p>
+<p>现在留了一个控制开关.默认是优先凋零.点击切换为优先传染.7.5秒只传染一次</p>
+<p>2025.5.22</p>
+<p>盗贼3.2</p>
+<p>修复一个盗贼教程无法正常消失的bug</p>
+<p>2025.5.22</p>
+<p>法师5.9</p>
+<p>修复一个插入燃烧可能导致无限活体的bug</p>
+<p>2025.5.22</p>
+<p>骑士3.0</p>
+<p>修复惩戒骑一个自动神圣愤怒不会打问题</p>
+<p>2025.5.21</p>
+<p>盗贼3.1</p>
+<p>修复冰龙停手问题</p>
+<p>2025.5.21</p>
+<p>邪dk双手1.2</p>
+<p>优化了一下大便逻辑.增加冰龙停手</p>
+<p>2025.5.21</p>
+<p>dkt团本1.7</p>
+<p>增加一个魔法盾和冰封的控制开关.需要手动的关闭即可</p>
+<p>2025.5.21</p>
+<p>元素萨2.6</p>
+<p>修复闪电盾的释放和开关不一致问题</p>
+<p>2025.5.20</p>
+<p>盗贼3.0</p>
+<p>增加一个女王的恐惧消失躲判断</p>
+<p>60级盗贼1.6</p>
+<p>增加还击判断</p>
+<p>2025.5.20</p>
+<p>生存猎3.0</p>
+<p>射击猎3.0</p>
+<p>瓦格里的逃脱改完插入式.没有考虑不站崖边的被抓.下载具触发后跳可能就下去了.</p>
+<p>2025.5.20</p>
+<p>野德3.6</p>
+<p>增加一个熊的横扫可控开关</p>
+<p>2025.5.20</p>
+<p>DKT团本1.6</p>
+<p>修复不会开冰封的bug</p>
+<p>双手邪1.1</p>
+<p>增加怪死了自动换下个目标功能</p>
+<p>2025.5.20</p>
+<p>法师5.8</p>
+<p>自动吃宝石修改为只有boss战才吃</p>
+<p>2025.5.19</p>
+<p>增强萨1.8</p>
+<p>增加冰龙5层停手</p>
+<p>2025.5.19</p>
+<p>盗贼2.9</p>
+<p>战士3.4</p>
+<p>猫德3.5</p>
+<p>邪恶意魔印5.3</p>
+<p>骑士2.9</p>
+<p>增加冰龙5层停手</p>
+<p>2025.5.19</p>
+<p>生存猎2.9</p>
+<p>射击猎2.9</p>
+<p>优化了凝神射击.大怪开始读条会停止任何技能使用.</p>
+<p>增加一个被瓦格里抓落地自动按逃脱功能,按住左键头朝崖外.</p>
+<p>用的是宏</p>
+<p>痛苦术3.9</p>
+<p>毁灭2.1</p>
+<p>恶魔2.3</p>
+<p>增加一个被瓦格里抓落地自动按传送功能(当然前提是你放过法阵)理论上可行.待勇士测试</p>
+<p>生存猎2.8</p>
+<p>射击猎2.9</p>
+<p>增加一个目标是脓疮僵尸自动扰乱,震荡射击</p>
+<p>增加灵魂戒卫(进剑)自动扰乱.灵魂戒卫对你释放技能自动假死</p>
+<p>骑士2.8</p>
+<p>增加公正圣印选项.</p>
+<p>开关宏需要有所调整不然你到公正切回去会卡主</p>
+<p>–切到腐蚀圣印.如果是联盟第二行和第三行tmw部分不要改.第一行和第4行的腐蚀可以改复仇</p>
+<p>2025.5.18</p>
+<p>骑士2.7</p>
+<p>修复目标驱散问题.增加单独开关方便控制</p>
+<p>2025.5.17</p>
+<p>法师5.7</p>
+<p>小萨屏蔽了各种方式的已血兽为目标的活体炸弹</p>
+<p>生存猎2.7</p>
+<p>射击猎2.8</p>
+<p>猎人印记屏蔽了寒冰之球</p>
+<p>骑士2.6</p>
+<p>驱散增加目标判断.你要帮别人驱目标选他即可</p>
+<p>猫德3.4</p>
+<p>增加一个进剑灵魂戒卫的打断技能</p>
+<p>法师5.6</p>
+<p>修复会打断唤醒的问题</p>
+<p>2025.5.16</p>
+<p>痛苦术3.8</p>
+<p>小团本boss或者首领boss如果装备永冻冰晶会判断第一个和35%的刷新</p>
+<p>盗贼2.8</p>
+<p>更换了教授的消失逻辑</p>
+<p>法师5.5</p>
+<p>更好了教授的隐身逻辑</p>
+<p>恶魔术2.2</p>
+<p>盗贼2.7</p>
+<p>战斗贼改了一下自动爆发的乱舞逻辑.</p>
+<p>身上有切割.某饰品触发开启乱舞>然后低能量杀戮盛宴>低能量冲动.</p>
+<p>切割改回乱舞期间也会补了</p>
+<p>法师5.4</p>
+<p>增加一个烂肠刺鼻毒气自动冰箱</p>
+<p>教授转阶段自动隐身(我不确定他能稳定的躲过去哦.待测试)</p>
+<p>盗贼2.6</p>
+<p>增加消失躲烂肠刺鼻毒气和教授的调制化合药剂</p>
+<p>DKT团本1.5</p>
+<p>修复收割灵魂的魔法盾.添加了冰封.没魔法盾开冰封</p>
+<p>骑士2.5</p>
+<p>防骑增加巫妖王大个子激怒自动锤子和神圣愤怒.</p>
+<p>2025.5.15</p>
+<p>法师5.3</p>
+<p>增加一个教派狂热者身上的吸血鬼之力的法术偷取判断.可焦点可目标</p>
+<p>生存猎2.5</p>
+<p>射击猎2.6</p>
+<p>修复一个焦点的尾王小怪凝神问题</p>
+<p>野德3.3</p>
+<p>修复冰墓问题</p>
+<p>邪恶意魔印5.2</p>
+<p>修复小萨不会传染问题</p>
+<p>野德3.2</p>
+<p>修复横扫问题</p>
+<p>野德3.1</p>
+<p>修复巫妖王发呆问题.</p>
+<p>野德3.0</p>
+<p>2025.5.11</p>
+<p>恶魔术2.1</p>
+<p>指向灭杀和焦点灭杀提早到小于2秒而非原来的没了才补.</p>
+<p>2025.5.9</p>
+<p>野德2.9</p>
+<p>鸟德2.1</p>
+<p>增加老2心控吹风功能.目标或者指向皆可</p>
+<p>2025.5.9</p>
+<p>DKT团本1.4</p>
+<p>DKT练级小本1.4</p>
+<p>增加冰霜吐息和灵魂收割自动魔法盾</p>
+<p>2025.5.8.17:00</p>
+<p>牧师3.3</p>
+<p>修复一个全自动触痛问题</p>
+<p>2025.5.8</p>
+<p>牧师3.2</p>
+<p>修复一个自动触可能连续释放问题</p>
+<p>痛苦术3.7</p>
+<p>修复痛苦无常可能连续释放问题</p>
+<p>2025.5.8</p>
+<p>牧师3.1</p>
+<p>法师5.2</p>
+<p>痛苦术3.6</p>
+<p>修复全自动关闭以后还是会打问题</p>
+<p>2025.5.7</p>
+<p>牧师3.0</p>
+<p>加了个全自动触和痛</p>
+<p>2025.5.7</p>
+<p>法师5.1</p>
+<p>增加了全自动活体</p>
+<p>痛苦术3.5</p>
+<p>增加了全自动无常和腐蚀术</p>
+<p>2025.5.2</p>
+<p>战士3.3</p>
+<p>增加一个猛击优先级的控制开关.默认是填充.在嗜血旋风后打.</p>
+<p>还有个选项是优先是在嗜血旋风前打.</p>
+<p>看个人喜好选择</p>
+<p>2025.5.2</p>
+<p>鸟德2.0</p>
+<p>优化了一下默认开关.优化了一下指向技能会打双子副目标问题</p>
+<p>2025.4.27</p>
+<p>60级战士3.3</p>
+<p>增加一个卡英勇的控制开关.</p>
+<p>默认开启:可以理解为双持模式</p>
+<p>关闭:可以理解为双手模式</p>
+<p>2025.4.26</p>
+<p>60级战士3.2</p>
+<p>增加一个插入化石合剂开关.</p>
+<p>2025.4.26</p>
+<p>60级战士3.1</p>
+<p>加了个首领起手自动1破.</p>
+<p>2025.4.26</p>
+<p>60级战士3.0</p>
+<p>增加一个断筋控制开关</p>
+<p>增加一个饰品插入开关.方便开水瓶</p>
+<p>2025.4.18</p>
+<p>法师5.0</p>
+<p>取消了老1的自动隐身功能</p>
+<p>2025.4.18</p>
+<p>法师4.9</p>
+<p>优化了一下镜像.现在应该能在进入战斗可攻击的第一时间开了.不需要打到99%的血.</p>
+<p>2025.4.17</p>
+<p>法师4.8</p>
+<p>优化了燃烧的逻辑.效果如刚发的视频</p>
+<p>2025.4.17</p>
+<p>骑士2.4</p>
+<p>防骑神圣之盾的优先级增加了一个控制开关.</p>
+<p>高优先级.在锤子出手后先盾</p>
+<p>低优先级.在打完所有技能以后开盾</p>
+<p>2025.4.17</p>
+<p>邪恶意5.1</p>
+<p>血沸屏蔽了狗头人.</p>
+<p>战士3.2</p>
+<p>命令怒吼屏蔽了阿努巴拉克</p>
+<p>2025.4.16</p>
+<p>60级战士2.8</p>
+<p>增加一个盾牌格挡控制开关</p>
+<p>2025.4.16</p>
+<p>恶意5.0</p>
+<p>凋零屏蔽了狗头人.</p>
+<p>2025.4.15</p>
+<p>牧师2.9</p>
+<p>修复一个小强没判断种族cd会卡主的问题</p>
+<p>2025.4.15</p>
+<p>牧师2.8</p>
+<p>修复一个小强没判断种族cd会卡主的问题</p>
+<p>2025.4.14</p>
+<p>盗贼2.5</p>
+<p>剑刃乱舞期间不再会补切割</p>
+<p>2025.4.14</p>
+<p>牧师2.7</p>
+<p>优化了针对小强的心灵专注.和种族.只在你开启aoe的时候开启</p>
+<p>2025.4.13</p>
+<p>战士3.1</p>
+<p>增加一个强制顺劈开关.</p>
+<p>计数器名字就是</p>
+<p>强制顺劈</p>
+<p>2025.4.12</p>
+<p>法师4.7</p>
+<p>优化了一下隐身术问题</p>
+<p>优化了一下多目标战斗时候的炎爆(如果场上有2个活体炸弹存在且有一个活体炸弹时间小于等于3.有大括号会优先释放瞬发炎爆)</p>
+<p>2025.4.12</p>
+<p>邪恶意4.9</p>
+<p>目标是狗头人的多余红色符文只打鲜血打击</p>
+<p>2025.4.11</p>
+<p>鸟德1.9</p>
+<p>修复一个身上无速度药水无法自动狂野魔法和插入狂野魔法的bug</p>
+<p>2025.4.10</p>
+<p>冰dk的邪冰1.1</p>
+<p>修复一个按键问题</p>
+<p>2025.4.10</p>
+<p>法师4.6</p>
+<p>优化了一下镜像问题.需要目标血量小于等于99%才会放</p>
+<p>2025.4.10</p>
+<p>邪恶意魔印4.8</p>
+<p>取消了符文武器和大军的联动(防止起手先招大军的打法上来就用符文武器)</p>
+<p>屏蔽了.狗头人的传染.可以方便你切目标上双病不会瞎几把传染浪费符文.</p>
+<p>增加了一个传染的插入功能.随时可以打开.但是目标身上有双病才会传染.最高优先级.</p>
+<p>2025.4.9</p>
+<p>法师4.5</p>
+<p>优化了一下火法自动镜像功能(包含在自动爆发里)</p>
+<p>2025.4.9</p>
+<p>骑士2.3</p>
+<p>2025.4.8</p>
+<p>法师4.4</p>
+<p>素质五连改为插入式.</p>
+<p>打开开关以后在冲击波和龙息都进入cd冷却以后会自行关闭.防止忘了关.</p>
+<p>推荐开关宏改为</p>
+<p>2025.4.8</p>
+<p>法师4.3</p>
+<p>增加一个火焰冲击尾刀功能</p>
+<p>2025.4.7</p>
+<p>盗贼2.4</p>
+<p>修复一个战斗贼乱舞期间多目标不会剔骨的bug.双子和小强的乱舞强制打剔骨</p>
+<p>2025.4.6</p>
+<p>法师4.2</p>
+<p>增加一个第二次撞击自动隐身功能(理论上能成功无非时间前后问题可能需要微调)</p>
+<p>2025.4.6</p>
+<p>猎人生存2.4</p>
+<p>猎人射击2.5</p>
+<p>优化了一下误导卡死问题</p>
+<p>2025.4.4</p>
+<p>恶意魔印4.7</p>
+<p>2025.4.1</p>
+<p>法师4.1</p>
+<p>修复一个小强P3中骨刺冰箱不出来问题</p>
+<p>2025.4.1</p>
+<p>法师4.0</p>
+<p>增加了一个法术吸取的总控开关</p>
+<p>2025.4.1</p>
+<p>法师3.9</p>
+<p>奥法增加了一个不打飞弹的开关.</p>
+<p>增加了气定神闲和奥术强化插入开关</p>
+<p>2025.4.1</p>
+<p>牧师2.6</p>
+<p>优化了一下4号的续焦点的逻辑</p>
+<p>2025.3.31</p>
+<p>生存猎2.3</p>
+<p>射击猎2.4</p>
+<p>优化了一下目标毒蛇和指向毒蛇的预计死亡时间功能</p>
+<p>增加了1个显眼的陷阱cd提示图标</p>
+<p>2025.3.29</p>
+<p>野德2.8</p>
+<p>优化一个猛虎无咆哮不会使用问题.</p>
+<p>2025.3.29</p>
+<p>痛苦术3.4</p>
+<p>修复一个吸魂期其他爆发技能在没有跳伤害的时候打的喜欢的bug</p>
+<p>2025.329</p>
+<p>法师3.8</p>
+<p>修复一个奥法飞弹会被爆发打断问题</p>
+<p>2025.3.29</p>
+<p>战士3.0</p>
+<p>增加一个焦点破甲功能</p>
+<p>2025.3.28</p>
+<p>恶魔术2.0</p>
+<p>增加一个焦点1级暗影箭骗灭杀功能.无开关.</p>
+<p>指向或者焦点都可以骗灭杀</p>
+<p>2025.3.28</p>
+<p>萨满元素萨2.5</p>
+<p>增加一个自动补火图腾开关.如果你打开这个开关的话.你默认的4图腾火系最好不要用天怒.会被盖掉</p>
+<p>在你火元素消失以后补个灼热图腾</p>
+<p>小强补熔岩.注意自己站位.</p>
+<p>2025.3.28</p>
+<p>法师3.7</p>
+<p>增加一个自动冰箱开关</p>
+<p>老1的冰吼击飞无保护自动冰箱</p>
+<p>老2的军团烈焰,血肉成灰</p>
+<p>老5的P3骨刺</p>
+<p>增加一个老1被冰自动闪现</p>
+<p>2025.3.28</p>
+<p>法师3.6</p>
+<p>完美解决燃烧以及活体时间问题.</p>
+<p>2025.3.27</p>
+<p>战士2.9</p>
+<p>目标是狗头人的时候会屏蔽掉旋风斩</p>
+<p>2025.3.27</p>
+<p>法师3.5</p>
+<p>修复奥法问题.</p>
+<p>暗牧2.5</p>
+<p>修复一个宝宝不会吃食物问题</p>
+<p>2025.3.27</p>
+<p>法师3.4</p>
+<p>增加了一个打断开关(可目标可焦点)</p>
+<p>优化了一下素质五莲的优先级和距离判断</p>
+<p>2025.3.27</p>
+<p>法师3.3</p>
+<p>优化了一下插入燃烧功能.当你插入燃烧时会自动判断需不需要补活体炸弹</p>
+<p>2025.3.27</p>
+<p>骑士2.2</p>
+<p>修复一个圣印舞在防骑会关不掉的问题</p>
+<p>2025.3.25</p>
+<p>元素萨2.3</p>
+<p>增加一个焦点火震和指向火震功能.无开关</p>
+<p>2025.3.25</p>
+<p>dkT1.3</p>
+<p>2个dkt版本修复一个偶发的吃宝宝卡主问题和一个符文分流会卡主的问题</p>
+<p>2025.3.25</p>
+<p>元素2.2</p>
+<p>自动爆发的元素掌握在嗜血期不再会开启.</p>
+<p>插入药水功能现在单纯只剩下一个药水.</p>
+<p>插入饰品功能会开种族+视频</p>
+<p>插入手套单纯只是手套</p>
+<p>2025.3.24</p>
+<p>暗牧2.4</p>
+<p>双子解开了焦点触的功能.现在会同色补触(看wcl应该是可以打的更高)</p>
+<p>2025.3.23</p>
+<p>恶意魔印4.6</p>
+<p>优化了一下起手天鬼+大军对4号的逻辑适配.冰暗血天灾传染起手.dk老家中心boss桩可以测试</p>
+<p>2025.3.23</p>
+<p>邪dk2.7</p>
+<p>恶意魔印4.5</p>
+<p>修复一个收割天赋天鬼结束可能切不回红脸的问题</p>
+<p>2025.3.23</p>
+<p>野德2.7</p>
+<p>修复一个所有首领多目标状态有可能会尾刀咆哮的bug</p>
+<p>2025.3.21</p>
+<p>野德2.6</p>
+<p>修复一个双子尾刀会咆哮的bug</p>
+<p>2025.3.21</p>
+<p>骑士2.1</p>
+<p>惩戒骑增加一个自动神圣愤怒开关(非小强自动打断)</p>
+<p>最低优先级填充技能.只对恶魔和亡灵生效</p>
+<p>需要满足十字军打击,神圣风暴,审判cd同时大于0.8秒才会扔(基本扔不出)</p>
+<p>2025.3.21</p>
+<p>野德2.5</p>
+<p>修复一个不会自动切目标问题</p>
+<p>2025.3.21</p>
+<p>骑士2.0</p>
+<p>修复一个防骑会被圣印舞影响的bug</p>
+<p>2025.3.20</p>
+<p>适配国服3.4.4版本</p>
+<p>2025.3.19</p>
+<p>暗牧2.3</p>
+<p>老2防打断的惩戒换成了躯体驱散防止脱离暗影形态</p>
+<p>2025.3.19</p>
+<p>元素萨2.2</p>
+<p>增加一个进化术开关.和增强一样只针对toc</p>
+<p>2025.3.19</p>
+<p>骑士1.9</p>
+<p>增加一个圣疗术的插入开关</p>
+<p>增加一个无脑给自己驱散的开关</p>
+<p>2025.3.19</p>
+<p>60级战士2.7</p>
+<p>增加了一个斩杀控制开关</p>
+<p>2025.3.18</p>
+<p>痛苦术3.3</p>
+<p>修复了速度药水小怪也会吃的问题</p>
+<p>2025.3.16</p>
+<p>痛苦术3.2</p>
+<p>修复一个续暗拥和腐蚀.偶尔暗影箭比鬼影优先级高的问题</p>
+<p>2025.3.16</p>
+<p>战士2.7</p>
+<p>修复一个防战因为自动错速引起的问题</p>
+<p>2025.3.16</p>
+<p>毁灭术2.0</p>
+<p>恶魔术1.9</p>
+<p>老1冰喉增加自动躲重型撞击(不一定100%成功).</p>
+<p>原理是用传送阵的传送无敌帧躲击飞.</p>
+<p>前提是你前面自己找个位置先放好传送阵.</p>
+<p>2025.3.12</p>
+<p>邪dk2.6</p>
+<p>邪恶意4.4</p>
+<p>修复一个传染的bug.</p>
+<p>2025.3.12</p>
+<p>盗贼2.3</p>
+<p>修改了刺杀贼的乱舞逻辑.只能插入或者boss战多目标下会自动开启</p>
+<p>2025.3.12</p>
+<p>痛苦术3.0</p>
+<p>修复一个4号锁失效问题.原来是上次他们说卡死被我删掉了.忘记加回去了.</p>
+<p>2025.3.9</p>
+<p>战士2.6</p>
+<p>增加一个自动错速功能.留了一个开关.如果有异常情况请关闭</p>
+<p>2025.3.9</p>
+<p>法师3.2</p>
+<p>牧师2.2</p>
+<p>痛苦术2.9</p>
+<p>毁灭术1.9</p>
+<p>恶魔术1.8</p>
+<p>2025.3.9</p>
+<p>冰dk1.3</p>
+<p>血DK团本1.2</p>
+<p>修复相关报错问题</p>
+<p>2025.3.9</p>
+<p>邪恶意魔印4.3</p>
+<p>邪DK2.5</p>
+<p>修复一个活力分流交互问题.偶然会导致血符文相关技能卡主问题</p>
+<p>2025.3.8</p>
+<p>邪恶意魔印4.2</p>
+<p>邪DK2.54</p>
+<p>优化了底层逻辑.现在可以适应任意天赋.</p>
+<p>2025.3.7</p>
+<p>元素萨2.1</p>
+<p>修复了元素掌握插入问题</p>
+<p>2025.3.7</p>
+<p>邪恶意魔印4.1</p>
+<p>修复了一个自动起手期间红符文鲜血打击miss会导致循环卡死的bug</p>
+<p>2025.3.7</p>
+<p>野德2.4</p>
+<p>增加了一个自动猛虎的可控开关</p>
+<p>自动爆发的狂暴必须要开着自动猛虎才能生效</p>
+<p>2025.3.6</p>
+<p>法师3.1</p>
+<p>老2虚空之能的偷取从5层改完10层</p>
+<p>2025.3.6</p>
+<p>痛苦2.8</p>
+<p>毁灭1.8</p>
+<p>恶魔1.7</p>
+<p>优化了一下分流逻辑.小强P3只保留了1级分流续buff.如果真的没蓝只能手动分流</p>
+<p>2025.3.6</p>
+<p>更换了女王之吻的规避逻辑.</p>
+<p>女王开始施法的时候马上断条.然后开始释放另一系的技能</p>
+<p>2025.3.6</p>
+<p>邪恶意魔印4.0</p>
+<p>优化了一下toc老1开关.</p>
+<p>在使用符文武器以后.远离18码即可释放天鬼不判断buff.防止跑早跑迟放不出(如果有恶意触发会有提示.没触发就要等打完9符文提示你跑,).提示和放的条件不是相等的.</p>
+<p>你不跑出去他会打完9个符文以后提醒你出去.</p>
+<p>2025.3.6</p>
+<p>邪恶意魔印3.9</p>
+<p>优化了一下大便的逻辑</p>
+<p>无天鬼期的原有魔法盾>=60能量大便.无魔法盾>=40能量大便改为</p>
+<p>魔法盾CD小于7.5秒>=60能量大便.</p>
+<p>魔法盾CD大于7.5秒>=40能量大便</p>
+<p>防止魔法盾刚好的时候有能量空窗开不出盾</p>
+<p>2025.3.6</p>
+<p>法师2.9</p>
+<p>修复一个双子不会焦点活体问题.</p>
+<p>法师的4号锁现在换目标的时候也自带焦点</p>
+<p>2025.3.4</p>
+<p>骑士1.8</p>
+<p>修复了一个联盟不会切会复仇的bug</p>
+<p>痛苦术2.6</p>
+<p>修复了一个25%不会吃速度药水的bug</p>
+<p>老1地狱火改为P3扔</p>
+<p>2025.3.4</p>
+<p>骑士1.7</p>
+<p>加了个圣印舞开关.</p>
+<p>只判断buff时间.不管周围怪个数.自己木桩适应一下</p>
+<p>开关宏</p>
+<p>连续按切换型</p>
+<p>连续按只开</p>
+<p>连续按只关</p>
+<p>2025.3.4</p>
+<p>战士2.5</p>
+<p>把猛击后置了.适当放宽了斩杀条件(大于等于70怒).</p>
+<p>2025.3.4</p>
+<p>法师2.8</p>
+<p>暗牧2.2</p>
+<p>鸟德1.8</p>
+<p>增加TOC老2女王之吻的特殊处理</p>
+<p>2025.3.3</p>
+<p>增强1.7</p>
+<p>解锁了猛犸的闪电链.现在能链到了.</p>
+<p>元素2.0</p>
+<p>增加一个10码3个+目标自动新星功能.请确保你的火图腾插在近战位.判断是根据你人的位置判断10码内怪物.炸是炸在图腾.注意区分</p>
+<p>2025.3.3</p>
+<p>术士痛苦术2.5</p>
+<p>毁灭术1.6</p>
+<p>恶魔术1.6</p>
+<p>增加了中女王之吻的处理.</p>
+<p>2025.3.3</p>
+<p>生存2.1</p>
+<p>射击2.3</p>
+<p>自动标记增加了一组首领怪(我不确定3号boss是不是按首领算的)</p>
+<p>2025.3.3</p>
+<p>痛苦术2.4</p>
+<p>自动爆发优化</p>
+<p>预计击杀时间>130开启或者25%开启</p>
+<p>2025.3.3</p>
+<p>法师2.7</p>
+<p>大幅优化了自动爆发.</p>
+<p>优化燃烧期3+1打法自适应</p>
+<p>全职业修复一个偶尔上线会发呆不会打的问题.</p>
+<p>2025.3.2</p>
+<p>生存猎2.0</p>
+<p>射击猎2.2</p>
+<p>增加了目标为小强小甲虫的自动凝神.</p>
+<p>2025.3.1</p>
+<p>野德2.3</p>
+<p>鸟德1.7</p>
+<p>修复一个因为4号锁定目标导致的无法选队友战服问题.</p>
+<p>邪恶意魔印3.8</p>
+<p>修复一个开自动炸弹会断大军问题</p>
+<p>2025.3.1</p>
+<p>邪恶意魔印3.7</p>
+<p>老1冰喉重型撞击的时候加了一组战斗事件判断(不知道能不能更稳定放出来)</p>
+<p>增加了一个目标是冰霜之球</p>
+<p>优先按普攻>宝宝攻击>天灾>鲜血>大便的判断(看施法距离).</p>
+<p>2025.2.28</p>
+<p>野德2.2</p>
+<p>修复一个偶发的目标预计死亡时间最后几秒无咆哮发呆问题</p>
+<p>2025.2.28</p>
+<p>邪恶意魔印DK3.6</p>
+<p>自动起手TOC老1天鬼释放距离改完大于18码</p>
+<p>2025.2.28</p>
+<p>邪恶意魔印DK3.5</p>
+<p>修复了一个收割天赋2T9未触发打血沸的问题</p>
+<p>2025.2.26</p>
+<p>法师2.6</p>
+<p>修复了一个卡了燃烧还没用掉又使用新燃烧的问题</p>
+<p>2025.2.26</p>
+<p>法师2.5</p>
+<p>加回了素质5连.(里面不含暴风雪.触发一触即燃才会放烈焰,不会读条烈焰)</p>
+<p>加回了霜火法开关.</p>
+<p>2025.2.26</p>
+<p>邪恶意3.4</p>
+<p>删掉了极寒吐息魔法盾</p>
+<p>增加一个小强P3中骨刺自动盾</p>
+<p>2025.2.26</p>
+<p>邪恶意3.3</p>
+<p>极寒吐息dbm提示0.5秒开魔法盾</p>
+<p>2025.2.26</p>
+<p>邪恶意3.2</p>
+<p>优化了一下魔法盾.军团烈焰自动开启</p>
+<p>优化了一下大便.</p>
+<p>前置大便:增加了1个目标死亡时间小于5优先释放的判断</p>
+<p>后置大便:一个魔法盾未使用60+能量释放.魔法盾已使用40+能量释放.</p>
+<p>2025.2.26</p>
+<p>痛苦术2.3</p>
+<p>恶魔术1.5</p>
+<p>毁灭术1.5</p>
+<p>修复一个兽人术士吃保护会卡种族爆发的问题</p>
+<p>2025.2.24</p>
+<p>暗牧2.1</p>
+<p>优化了一下心灵专注+辫子的逻辑</p>
+<p>2025.2.24</p>
+<p>野德2.1</p>
+<p>优化了一下凶猛撕咬和高位能量的撕碎的能量控制</p>
+<p>2025.2.23</p>
+<p>元素萨1.9</p>
+<p>修复了一个自动药水会失效问题</p>
+<p>2025.2.23</p>
+<p>全职业自动爆发药水修复一个战斗中死亡被战服起来离你上一个药水时间cd没到会卡主的问题</p>
+<p>所有版本号未变</p>
+<p>2025.2.23</p>
+<p>盗贼2.2</p>
+<p>战斗贼修复一个打小怪的时候也会开乱舞的问题.改完至少是boss战</p>
+<p>2025.2.23</p>
+<p>法师2.4</p>
+<p>增加一个焦点活动炸弹的可控开关.</p>
+<p>增加一个焦点活动炸弹预计死亡15秒+施法条件</p>
+<p>此开关可以常开</p>
+<p>2025.2.23</p>
+<p>邪恶意魔印3.1</p>
+<p>现在恶意魔印版的”嗜血天鬼”功能必须全buff或者某buff时间小于3或者嗜血小于30才会放.</p>
+<p>“插入大天鬼”功能必须全buff或者某buff时间小于3</p>
+<p>加上了2T9判断</p>
+<p>2025.2.23</p>
+<p>邪恶意魔印DK3.0</p>
+<p>修复一个起手蓄能会提前扔天鬼问题.</p>
+<p>现在恶意魔印版的”嗜血天鬼”功能必须全buff或者某buff时间小于3或者嗜血小于30才会放.</p>
+<p>2025.2.23</p>
+<p>痛苦术士2.2</p>
+<p>增加一个双子的厄运开关.</p>
+<p>打开的情况下第一个诅咒技能是厄运诅咒</p>
+<p>方便要起手打双线的兄弟</p>
+<p>2025.2.23</p>
+<p>盗贼2.1</p>
+<p>战斗贼修复了一个自动爆发无法关闭问题.</p>
+<p>战斗贼重做了剑刃乱舞条件.剑刃乱舞现在只有一种条件会自动开.就是多目标</p>
+<p>2025.2.23</p>
+<p>痛苦术士2.1</p>
+<p>修复一个腐蚀术的双子刷新bug导致双子伤害过低问题.</p>
+<p>默认现在关闭了超级腐蚀术的刷新.现在的战斗时间刷新都是亏</p>
+<p>2025.2.23</p>
+<p>邪DK恶意魔印2.9</p>
+<p>优化了非自动起手的天灾打击逻辑.</p>
+<p>2025.2.22</p>
+<p>法师2.3</p>
+<p>修复一个炎爆读条问题</p>
+<p>2025.2.20</p>
+<p>野德2.0</p>
+<p>前面斜掠有点bug修复一下</p>
+<p>凶猛撕咬的5星尾刀增加一个狂暴期判断.目标死亡小于2秒</p>
+<p>2025.2.20</p>
+<p>野德1.9</p>
+<p>2025.2.20</p>
+<p>野德1.8</p>
+<p>解除了斜掠的星数限制.现在只要没有斜掠会优先补(目标死亡时间大于10)</p>
+<p>2025.2.20</p>
+<p>法师2.2</p>
+<p>暗牧2.0</p>
+<p>元素1.8</p>
+<p>修复一个联盟玩家自动爆发不会使用主动饰品的bug</p>
+<p>2025.2.19</p>
+<p>元素1.7</p>
+<p>修复了一个偶发的出手过慢问题</p>
+<p>2025.2.18</p>
+<p>法师2.1</p>
+<p>增加了一个同时纯在大小括号先打炎爆的判断.</p>
+<p>2025.2.18</p>
+<p>鸟德1.6</p>
+<p>修复一个精灵火控制开关无法控制精灵火的bug</p>
+<p>2025.2.18</p>
+<p>元素萨1.6</p>
+<p>删除了增强的插入战栗会在元素生效导致无限重插战栗图腾的问题</p>
+<p>2025.2.16</p>
+<p>邪恶意魔印2.8</p>
+<p>修复一个收割天赋天鬼结束绿脸切不回红脸的bug</p>
+<p>2025.2.15</p>
+<p>战士2.4</p>
+<p>修复一个自动爆发的bug</p>
+<p>2025.2.14</p>
+<p>战士2.3</p>
+<p>修复一个自动爆发的bug</p>
+<p>2025.2.14</p>
+<p>邪恶意2.7</p>
+<p>修复了一个TOC老1自动起手开关相关的bug</p>
+<p>2025.2.14</p>
+<p>优化了一下全职业的关于TOC老1撞晕以后的爆发开启.uld心脏和大脑的爆发开启问题.</p>
+<p>战斗贼加了自动爆发.自己注意安全</p>
+<p>2025.2.13</p>
+<p>生存猎1.9</p>
+<p>射击猎2.1</p>
+<p>2025.2.13</p>
+<p>战士2.2</p>
+<p>toc4号不管视野强制顺劈斩</p>
+<p>法师2.0</p>
+<p>修复一个刚刚增加的toc锁定目标引起的角度炸弹和炎爆问题</p>
+<p>2025.2.13</p>
+<p>所有职业最新版增加了一个toc4号锁定功能.打开情况下,吃白自动锁黑目标,吃黑锁白目标.防骑防战除外</p>
+<p>2025.2.13</p>
+<p>骑士1.5</p>
+<p>增加了一个toc小强中虫的自动神圣愤怒断暗影突击功能</p>
+<p>2025.2.13</p>
+<p>元素萨1.4</p>
+<p>修复了一个第一次上线开关全关不正常的问题</p>
+<p>2025.2.12</p>
+<p>元素萨1.3</p>
+<p>优化了点东西.边打边改的忘记改了什么了.</p>
+<p>暗牧1.8</p>
+<p>优化了一下精神灼烧的add问题</p>
+<p>2025.2.11</p>
+<p>邪恶意2.5</p>
+<p>修复了一个自动起手未触发以后存在的一个bug</p>
+<p>2025.2.10</p>
+<p>邪恶意2.4</p>
+<p>优化了一下自动起手的逻辑.增加堕落十字军和2T9的判断(和2T9开关联动)</p>
+<p>2025.2.4</p>
+<p>射击猎2.0</p>
+<p>修复一个奥术射击问题.正确应该是移动中没其他技能才打</p>
+<p>2025.2.4</p>
+<p>生存猎1.7</p>
+<p>射击猎1.9</p>
+<p>增加一个toc老1激怒自动凝神</p>
+<p>2025.2.3</p>
+<p>暗牧1.7</p>
+<p>修复一个单体aoe切换开关和刷新痛开关点击过快会消失的bug</p>
+<p>2025.2.3</p>
+<p>60战士2.6</p>
+<p>屏蔽了mc2号的自动狂暴之怒</p>
+<p>80战士2.0</p>
+<p>修复了一个盾牌格挡开关的问题</p>
+<p>2025.1.31</p>
+<p>痛苦术1.9</p>
+<p>优化了一下由于宝宝目标引起的toc4号会给非当前目标上痛苦无常问题</p>
+<p>2025.1.31</p>
+<p>60级战士2.5</p>
+<p>给狂暴T的锁防御姿态和旋风斩做了联动.</p>
+<p>开启旋风斩的时候大于等于2目标会切狂暴旋风.</p>
+<p>关闭旋风斩的时候和原来一样长锁防御姿态</p>
+<p>2025.1.27</p>
+<p>法师1.8</p>
+<p>增加toc老2的自动偷取魔法的预计死亡时间判断.</p>
+<p>预计死亡大于15秒才会偷buff</p>
+<p>2025.1.27</p>
+<p>邪DK2.3</p>
+<p>邪恶意魔印2.3</p>
+<p>亡者大军施法期间屏蔽了心灵冰冻</p>
+<p>2025.1.27</p>
+<p>dkt团本1.2</p>
+<p>dkt练级小本1.2</p>
+<p>优化了要塞尾王会按键问题</p>
+<p>2025.1.26</p>
+<p>生存猎1.6</p>
+<p>射击猎1.8</p>
+<p>增加一个指向毒蛇钉刺选项及功能</p>
+<p>2025.1.25</p>
+<p>dkt团本1.1</p>
+<p>dkt练级小本1.1</p>
+<p>增加了防add判断</p>
+<p>2025.1.23</p>
+<p>骑士1.4</p>
+<p>修复了一个手套不开bug</p>
+<p>法师1.7</p>
+<p>不小心跳过1.6了.没有1.6</p>
+<p>优化了火法的施法逻辑.删除了霜火法.</p>
+<p>2025.1.20</p>
+<p>鸟德1.4</p>
+<p>修复一个比较严重的按键bug</p>
+<p>2025.1.20</p>
+<p>恶意魔印2.2</p>
+<p>修复了炸弹问题</p>
+<p>2025.1.20</p>
+<p>全职业优化了自动爆发.</p>
+<p>toc老1改为起手和P3boss击晕.</p>
+<p>toc小强改为起手和30%以下</p>
+<p>骑士1.3</p>
+<p>增强萨1.5(起手建议火人插在正对boss偏左后一点可以A到P2毒虫)</p>
+<p>元素萨1.2(起手建议火人插在正对boss偏左后一点可以A到P2毒虫)</p>
+<p>盗贼2.0</p>
+<p>生存猎1.5</p>
+<p>射击猎1.7</p>
+<p>法师1.5</p>
+<p>痛苦术1.8</p>
+<p>毁灭术1.3</p>
+<p>恶魔术1.3</p>
+<p>战士1.9</p>
+<p>鸟德1.3</p>
+<p>猫德1.6</p>
+<p>2025.1.19</p>
+<p>邪恶意魔印2.1</p>
+<p>优化了一下自动起手天鬼和自动起手天鬼+大军的buff监视逻辑</p>
+<p>我号没魔印不知道有没有什么bug.理论上应该没有</p>
+<p>2025.1.19</p>
+<p>德鲁伊鸟德1.2</p>
+<p>增加一个移动虫群开关.T8虫群加成开虫群和移动月火.T9月火加成以后开保持月火和移动虫群.优先级互换</p>
+<p>增加2个指向开关.指向虫群和指向月火.</p>
+<p>5人本镜像指向自动月火</p>
+<p>2025.1.18</p>
+<p>80战士1.8</p>
+<p>修复一个深防切战斗姿态问题</p>
+<p>2025.1.18</p>
+<p>60战士2.4</p>
+<p>增加了一个狂暴战强制顺劈选项</p>
+<p>2025.1.18</p>
+<p>猫德增加一个新的插入开关.猛虎接狂暴</p>
+<p>在狂暴可用时打开可在猛虎使用后直接接狂暴.避免老的插入那种猛虎完直接打技能导致能量低问题</p>
+<p>开关宏:</p>
+<p>2025.1.17</p>
+<p>术士痛苦术1.7</p>
+<p>toc老4焦点续腐蚀改为5秒内就补.原为4秒内</p>
+<p>2025.1.17</p>
+<p>邪恶意魔印2.0</p>
+<p>如果用自动起手的目标是冰球会先打鲜血打击.以免影响正常循环.</p>
+<p>2025.1.17</p>
+<p>冰霜之球取消了防add.谨慎选择.选了就会打</p>
+<p>2025.1.17</p>
+<p>术士痛苦术1.6</p>
+<p>优化了一下无脑种子功能.适配了一个单独的分流设置小于30%蓝分流.方便刷本</p>
+<p>2025.1.17</p>
+<p>猎人生存猎1.4</p>
+<p>猎人射击猎1.6</p>
+<p>优化了一下猎人指向陷阱(插入爆炸陷阱功能)</p>
+<p>在cd没好时现在提前按无效.现在秒按秒扔(如果在稳固会断条)</p>
+<p>2025.1.17</p>
+<p>战士1.7</p>
+<p>优化了一下切战斗姿态问题.现在深防不会脱战切战斗了.复仇才会</p>
+<p>2025.1.17</p>
+<p>暗牧1.5</p>
+<p>优化了一下帧数</p>
+<p>2025.1.17</p>
+<p>德鲁伊野德1.4</p>
+<p>修复toc老1猛犸怪多发呆问题.</p>
+<p>恶意邪1.9</p>
+<p>修复一个非开启TOC老1自动起手开关期间疯狂提示放天鬼的行为</p>
+<p>2025.1.17</p>
+<p>全职业要塞尾王特殊处理.被吸住不再会一直按键了</p>
+<p>2025.1.16</p>
+<p>术士痛苦术1.5</p>
+<p>修复toc老4问题</p>
+<p>2025.1.16</p>
+<p>邪恶意魔印1.8</p>
+<p>修复一个指向凋零无法正常释放问题</p>
+<p>2025.1.16</p>
+<p>萨满增萨满1.4</p>
+<p>2025.1.16</p>
+<p>战士1.6</p>
+<p>修复一个会卡格挡的bug</p>
+<p>2025.1.16</p>
+<p>邪dk2.2</p>
+<p>恶意1.7</p>
+<p>修改了老1冰喉天鬼逻辑.只在开始读条才放</p>
+<p>2025.1.16</p>
+<p>战士1.5</p>
+<p>优化了一下复仇战逻辑</p>
+<p>增加了一个横扫攻击判定.需要插雕文</p>
+<p>2025.1.16</p>
+<p>痛苦术1.4</p>
+<p>优化了一下toc4号的焦点逻辑</p>
+<p>2025.1.16</p>
+<p>法师1.4</p>
+<p>增加一个镜像的指向冰枪和目标冰枪.方便打5人本</p>
+<p>2025.1.16</p>
+<p>全近战自动aoe对镜像做了特殊处理.更新TMW配置即可</p>
+<p>2025.1.16</p>
+<p>邪dk2.1</p>
+<p>toc老1穿刺者戈莫克改完够60能量远离15码自动天鬼.(如果没触发最好也不要等不然你回来大军没时间拉.如果是提前拉了大军可以等),回位大军</p>
+<p>以上功能无任何开关</p>
+<p>恶意魔印1.6</p>
+<p>手动起手开关名字改为toc老1</p>
+<p>打开开关正常循环到需要放天鬼会提示你跑出去.放出来也会提示你往回跑.回味以后自动大军.</p>
+<p>2个改动均可以用dk老家中心木桩测试.自己习惯一下</p>
+<p>2025.1.15</p>
+<p>增强1.3</p>
+<p>回退一个穿刺者戈莫克闪电链特殊处理</p>
+<p>2025.1.15</p>
+<p>全职业做了穿刺者戈莫克aoe屏蔽</p>
+<p>增强1.2</p>
+<p>穿刺者戈莫克闪电链特殊处理</p>
+<p>战士1.4</p>
+<p>穿刺者戈莫克顺劈斩特殊处理</p>
+<p>2025.1.15</p>
+<p>dk2.0</p>
+<p>恶意魔印1.5</p>
+<p>增加2T9判断.自动关注2T9内置cd.默认开启状态.无2T9可关闭.(做的时候表述写成2T10了.自己知道就行)</p>
+<p>2025.1.11</p>
+<p>80级战士1.3</p>
+<p>修复防战的技能插入问题</p>
+<p>2025.1.11</p>
+<p>法师1.3</p>
+<p>增加toc老2的法术偷取.小于5层或者持续时间小于10秒会一直偷</p>
+<p>2025.1.10</p>
+<p>生存1.3</p>
+<p>射击1.5</p>
+<p>宝宝食物加了距离判断防止卡主.</p>
+<p>优化了一下乱射插入</p>
+<p>2025.19</p>
+<p>邪DK1.9</p>
+<p>恶意邪1.4</p>
+<p>toc老1的天鬼延后至dbm条小于0.6秒时施放.不考虑buff.0.6+1秒读条最低值了.不然转其他GCD的话可能放不出</p>
+<p>2025.1.6</p>
+<p>盗贼1.9</p>
+<p>修复一个强制刀扇期间会打其他技能的bug</p>
+<p>2025.1.3</p>
+<p>私服萨满1.3</p>
+<p>修复一个私服的无限插入图腾问题.</p>
+            </div>
+        </div>
+    `;
+
+            // 隐藏所有内容区域
+            hideAllSections();
+
+            // 设置新内容
+            var contentDiv = document.getElementById('log-content');
+            contentDiv.innerHTML = tempContent;
+            contentDiv.classList.add('active');
+
+            // 添加恢复函数到window对象
+            window.restoreLogContent = function () {
+                document.getElementById('log-content').innerHTML = originalLogContent;
+            };
+        }
+
+        function showW2Log() {
+            // 保存原始日志内容
+            var originalLogContent = document.getElementById('log-content').innerHTML;
+
+            // 创建临时显示内容
+            var tempContent = `
+        <div style="position: relative; min-height: 300px;">
+            <button onclick="window.showSection('log'); restoreLogContent();"
+                    style="position: absolute; top: 10px; right: 10px; padding: 8px 15px; 
+                           background-color: #2c2c2c; color: white; border: none; 
+                           border-radius: 4px; cursor: pointer;">返回</button>
+            <div style="color:white; padding:50px;">
+                <h2>【W2】小易循环助手更新日志</h2>
+
+        <div class="button-container">
+            <div class="program-button" onclick="showW21Log()">
+                <h4>术士</h4>
+            </div>
+            <div class="program-button" onclick="showW22Log()">
+                <h4>法师</h4>
+            </div>
+            <div class="program-button" onclick="showW23Log()">
+                <h4>牧师</h4>
+            </div>
+            <div class="program-button" onclick="showW24Log()">
+                <h4>猎人</h4>
+            </div>
+            <div class="program-button" onclick="showW25Log()">
+                <h4>小德</h4>
+            </div>
+            <div class="program-button" onclick="showW26Log()">
+                <h4>骑士</h4>
+            </div>
+            <div class="program-button" onclick="showW27Log()">
+                <h4>战士</h4>
+            </div>
+            <div class="program-button" onclick="showW28Log()">
+                <h4>萨满</h4>
+            </div>
+            <div class="program-button" onclick="showW29Log()">
+                <h4>盗贼</h4>
+            </div>
+            <div class="program-button" onclick="showW20Log()">
+                <h4>死骑</h4>
+            </div>
+        </div>
+    </div>
+ </div>
+    `;
+
+            // 隐藏所有内容区域
+            hideAllSections();
+
+            // 设置新内容
+            var contentDiv = document.getElementById('log-content');
+            contentDiv.innerHTML = tempContent;
+            contentDiv.classList.add('active');
+
+            // 添加恢复函数到window对象
+            window.restoreLogContent = function () {
+                document.getElementById('log-content').innerHTML = originalLogContent;
+                showSection('log');
+            };
+        }
+
+        function showW3Log() {
+            // 保存原始日志内容
+            var originalLogContent = document.getElementById('log-content').innerHTML;
+
+            // 创建临时显示内容
+            var tempContent = `
+        <div style="position: relative; min-height: 300px;">
+            <button onclick="window.showSection('log'); restoreLogContent();"
+                    style="position: absolute; top: 10px; right: 10px; padding: 8px 15px; 
+                           background-color: #2c2c2c; color: white; border: none; 
+                           border-radius: 4px; cursor: pointer;">返回</button>
+            <div style="color:white; padding:50px;">
+                <h2>【W3】AutoHelp更新日志</h2>
+<p>插件版本更新548（2025.06.08）</p>
+<p>调整简洁界面，增加开始暂停和技能提示框</p>
+<p>增加界面水印</p>
+<p>插件版本更新547（2025.06.08）</p>
+<p>生存猎人增加爆发野性呼唤（需要手动取消宠物技能自动野性呼唤）</p>
+<p>增加界面平面/复古风格选择</p>
+<p>修改狂咒停手默认为4层（快速施法会在5层停手）</p>
+<p>冰墓增加奶德/牧师设置（回春/恢复/套盾）</p>
+<p>插件版本更新546（2025.06.07）</p>
+<p>ICC特化更新持续进行中。。。</p>
+<p>差异化用户平面界面</p>
+<p>插件版本更新545（2025.06.05）</p>
+<p>ICC特化更新持续进行中。。。</p>
+<p>忘记更新了什么，反正一直在更新。。。</p>
+<p>插件版本更新542（2025.05.30）</p>
+<p>ICC特化更新持续进行中。。。</p>
+<p>惩戒骑/防骑加入自动圣印选项，不需要自动切换圣印可不选</p>
+<p>修复猎人/术士/暗牧/法师dot延迟问题，猎人优化4T10优先补毒蛇</p>
+<p>术士增加BOSS和小怪上DOT的血量控制【5%-20%】</p>
+<p>术士现在多目标有厄运诅咒不再会被痛苦诅咒覆盖</p>
+<p>猎人增加多重射击蝰蛇舞，自动切换蝰蛇/龙鹰守护回蓝</p>
+<p>插件版本更新540（2025.05.29）</p>
+<p>ICC特化更新中。。。</p>
+<p>防御战士加入自动嘲讽</p>
+<p>熊德加入自动嘲讽，自动群嘲</p>
+<p>惩戒骑加入2T10套装循环优先级，以及AOE/单体自动切换圣印</p>
+<p>防骑加入AOE/单体自动切换圣印</p>
+<p>修复奶萨治疗绿龙循环【激流+2波+链子+2波】，以及支持奶萨双持天赋治疗绿龙</p>
+<p>修复一个可能会让治疗巫妖王P5阶段发呆的问题</p>
+<p>插件版本更新539（2025.05.28）</p>
+<p>ICC特化更新中。。。</p>
+<p>所有治疗职业增加治疗友方目标功能及血量阈值，现在可以治疗NPC及团队以外友方目标，可以设置为焦点/选中为目标/鼠标指向进行治疗</p>
+<p>修复牧师冰墓恢复和套盾优先级，现在不需要暂停无脑盾</p>
+<p>牧师增加BOSS战倒计时套盾功能</p>
+<p>修复TOC刺骨错误</p>
+<p>牧师现在ICC尾王能自动设置低等级套盾和满级盾自动切换，P1/P3使用设置低等级盾，其他阶段满级盾</p>
+<p>所有治疗职业现在会更智能刷灵魂收割/收割灵魂目标，直到他们的debuff消失</p>
+<p>修复苦修/血歌/蓝歌/宁静等施法会提前打断问题</p>
+<p>ICC尾王猎人增加鼠标指向僵尸怪自动焦点功能，现在自动宁神焦点目标/鼠标指向/选中目标</p>
+<p>插件版本更新536（2025.05.21）</p>
+<p>ICC特化更新中。。。</p>
+<p>法师多目标修复，增加上活动炸弹的boss和小怪血量设置</p>
+<p>猎人多目标修复，增加上毒蛇钉刺的boss和小怪血量设置</p>
+<p>鸟德多目标修复，增加上虫群或者月火术的boss和小怪血量设置</p>
+<p>暗牧多目标修复，增加上痛的boss和小怪血量设置</p>
+<p>小德加入老2旋风精神控制设置选项，现在能控制职业可以鼠标指向来控制，取消了盗贼/QS的控制</p>
+<p>尾王增加收割灵魂治疗，所有治疗均会治疗</p>
+<p>插件版本更新528（2025.05.20）</p>
+<p>ICC特化更新中。。。</p>
+<p>进一步强化自动跟随功能，现在即使在施法也会打断施法跟随目标</p>
+<p>增加奶骑瞬发圣闪选项，即使移动中没有设置也不使用瞬发圣闪</p>
+<p>奶骑治疗法术现在缺省只选择圣光术，去掉圣光闪现</p>
+<p>巫妖王死疽现在改成默认4秒驱散，并可以自定义延迟驱散时间</p>
+<p>增加dkt在议会鼠标现在可以指向冰触/缠绕 黑暗之核，不用选择黑暗之核即可拉怪</p>
+<p>冰龙狂咒增加层数选择，现在默认5层停手，设置0为立即停手</p>
+<p>猎人增加多目标杀戮射击，可以鼠标指向/焦点/自动扫描使用杀戮射击</p>
+<p>ICC老2猎人P1现在会自动打[蝰蛇钉刺]抽蓝/cd阶段自动补钉刺/li></p>
+<p>ICC老2自动多目标现在可以排除任务怪达尔纳文了</p>
+<p>ICC教授奶骑增加自动道标变异高达</p>
+<p>ICC教授牧师增加给高达保持盾回能量</p>
+<p>ICC教授奶德增加给高达保持回春回能量</p>
+<p>法师在教授战斗中，会自动隐身躲【催泪毒气】，玩命20秒输出吧</p>
+<p>盗贼在教授战斗中，会自动消失躲【催泪毒气】，玩命20秒干吧</p>
+<p>巫妖王坦克中收割后，MS自动套盾+苦修，奶德自动回春+迅捷+滋养，奶萨自动激流+治疗波</p>
+<p>插件版本更新526（2025.05.17）</p>
+<p>冰龙特化更新，所有坦克职业包括防骑/防战/血DK/熊T都会在设置寒霜刺骨层数后改用不叠层数的技能攻击，如防骑会踩奉献/驱邪/神圣之盾等，血DK会打冰触/凋零缠绕等消层数。</p>
+<p>冰龙特化所有近战职业，寒霜刺骨叠满层数后改打不叠层数的技能攻击如CJQ踩奉献/神圣风暴/清算之手等消层数</p>
+<p>优化老4印记逻辑和几个小bug，现在NQ不会只加自己血了</p>
+<p>冰龙MS会自动给中冰霜道标队友套盾/恢复，奶德自动丢回春术</p>
+<p>尾王巫妖王猎人现在可以自动打宁神射击，不需要选择目标自动完成宁神射击</p>
+<p>尾王巫妖王，死疽现在改成有驱散职业，在3秒后自动驱散（防骑/奶骑/奶萨）</p>
+<p>尾王戒律牧盾等级重新调整为10/11/12/14级，建议装备差的勾12级</p>
+<p>更多icc特化不再一一罗列，会一直保持自动更新</p>
+<p>插件版本更新525（2025.05.16）</p>
+<p>进一步优化插件加载速度，进一步优化插件内存消耗和更高效的运行速度</p>
+<p>增加巫妖王戒律牧无脑盾等级</p>
+<p>巫妖王自动禁止了自动解除疾病选项</p>
+<p>增加老1前小怪瓦解怒吼自动停止施法0.5秒</p>
+<p>老2惩戒骑控制心控改成制裁之锤，法师羊/小德吹风都能在消失后继续补羊补吹风</p>
+<p>奶骑印记治疗不再自动使用圣疗，翅膀会导致圣疗不能使用卡住技能</p>
+<p>绿龙治疗NQ纠正有人将绿龙设置焦点导致直接治疗绿龙（切勿设置绿龙焦点）</p>
+<p>修正冰龙狂咒停手问题，现在冰霜和狂咒都能正常停手</p>
+<p>更多icc特化不再一一罗列，会一直保持自动更新</p>
+<p>插件版本更新518（2025.05.15）</p>
+<p>ICC所有职业均能正常运行，各职业适配会不断完善</p>
+<p>优化战斗中自动寻怪功能，现在能快速寻找最近的怪物攻击</p>
+<p>老2多目标会自动规避心控队友/反魔法小怪，法师会自动羊心控并补羊/小德旋风/盗贼致盲/惩戒骑忏悔</p>
+<p>所有治疗都能治疗死亡使者萨鲁法尔的阵亡者印记，戒律牧会无脑给血沸/印记等套盾。</p>
+<p>所有坦克在死亡使者萨鲁法尔自动嘲讽boss（符文之血DEBUFF）</p>
+<p>所有治疗职业都能在选择治疗绿龙后自动治疗绿龙，如果选择了自动跟随，还会自动跟随选择的目标去吃球。</p>
+<p>议会猎人/术士会自动禁止宝宝跟随攻击，需要自己操作宝宝进行攻击。</p>
+<p>冰龙坦克在冰龙吐息会自动保命技能，dkt会自动开反魔法护照，dkt在P3如果魔法罩cd还会自动开冰封之韧，防骑会自动开圣佑术/拯救+饰品。</p>
+<p>所有近战职业包括坦克，可以设置寒霜刺骨停手以及层数（5层），在层数达到后自动停手，另外停手后自动技能（不叠层）功能还在开发中，可能需要一段时间。</p>
+<p>所有远程带法力职业，有狂咒停手选项，中狂咒后立即停止一切动作。</p>
+<p>巫妖王猎人自动凝神射击还在适配中。</p>
+<p>戒律牧巫妖王自动套盾不同等级的盾设置还在适配中。</p>
+<p>插件版本更新512（2025.05.08）</p>
+<p>所有配置选项ID均在提示中显示，可通过宏自行更改</p>
+<p>继续优化完善相关职业以及ICC适配中。。。</p>
+<p>插件版本更新510（2025.05.05）</p>
+<p>修复盗贼AOE刀扇技能多目标时不使用错误</p>
+<p>奶萨增加自动潮汐之潮图腾，增加治疗图腾/法力图腾自动释放选择</p>
+<p>插件版本更新506（2025.04.30）</p>
+<p>修复小黑兔版本的3.4.3私服所有职业，现在都能使用，需要练习ICC的可以尝试</p>
+<p>修复所有治疗小强刺骨混乱错误/个别dps职业小强P3停手问题</p>
+<p>ICC适配正在进行中，欢迎大家多提建议</p>
+<p>客户端版本更新5.0.1_501（2025.04.28）</p>
+<p>启动后自动更新，如果出现过期请重新下载安装！</p>
+<p>插件版本更新501（2025.04.28）</p>
+<p>所有当前还有点卡时间的用户，均已免费赠送7天点卡时间</p>
+<p>AH底层逻辑架构重铸，现在施法序列将更加顺畅，更多细节等待回头整理</p>
+<p>由于程序改动较多，如果错误或者建议，请及时告知！</p>
+<p>插件版本更新491（2025.04.23）</p>
+<p>AH目前可以适配私服3.4.3版本，在小黑兔上进行过测试可以完美运行</p>
+<p>MS愈合祷言优先对目标/目标的目标/焦点/鼠标指向/坦克顺序施放（以前只对坦克施放）</p>
+<p>完善神圣牧师治疗循环，增加神牧治疗祷言以及祷言设置，增加神牧治疗之环以及设置</p>
+<p>可以通过下面的宏，来快速设置模式或者设置血量:</p>
+<p>#showtooltips 快速治疗</p>
+<p>##/run AH.SetMode("治疗")</p>
+<p>/run AH.SetHealAll(true,98)</p>
+<p>/run AH.SetHealTank(true, 75)</p>
+<p>/run AH.SetHealTarget(false, 98)</p>
+<p>插件版本更新487（2025.04.21）</p>
+<p>优化元素萨满/增强萨满循环，优化自动火图腾，在饰品（尽可能双饰品）爆发后，自动喝狂野魔法药水，开启火元素图腾</p>
+<p>去掉痛苦术士斩杀爆发，改为斩杀喝药爆发，根据你自己的情况是否留饰品爆发到斩杀阶段</p>
+<p>TOC老2女王之吻现在元素萨满/奶萨满/法师/术士/牧师/奶德/奶骑(光环掌握)/鸟德都可以使用其他系法师规避沉默效果</p>
+<p>优化猎人技能循环/爆炸射击3/4等级判定，杀戮射击/爆炸射击可自定义等待时间，以便打出更多爆炸射击和杀戮射击</p>
+<p>插件版本更新486（2025.04.20）</p>
+<p>奶德加入预补回春队伍选择,使用方法和牧师无脑盾一样</p>
+<p>防战加入盾牌格挡技能</p>
+<p>进一步优化饰品爆发逻辑</p>
+<p>优化邪DK界面，天鬼和大军变成技能选中，继续优化循环</p>
+<p>插件版本更新485（2025.04.19）</p>
+<p>完善饰品爆发/药剂爆发循环逻辑</p>
+<p>优化战斗贼饰品爆发循环，杀戮盛筵争取双饰品爆发快照，增加冲动乱舞等待AOE时刻使用</p>
+<p>优化猫德狂暴饰品时机，在boss血量低于10%之后自动卡cd开启不在等待饰品爆发</p>
+<p>修复奶德迅捷治愈bug，修复奶德危机处理使用迅捷治愈bug</p>
+<p>插件版本更新481（2025.04.18）</p>
+<p>牧师增加按队伍套盾/恢复</p>
+<p>法师加入自动制作宝石/战斗中自动吃宝石，加入自动冰箱，加入自动寒冰护体/法力护盾/火盾/战斗保持等功能</p>
+<p>修正不灭药水逻辑，狂战/冰DK/防战/防骑加入DMB倒数偷不灭药水</p>
+<p>邪DK/双手邪DK加入2T9套装效果判定，让鲜血打击更多触发套装效果</p>
+<p>插件版本更新477（2025.04.18）</p>
+<p>所有职业增加开怪倒计时偷药</p>
+<p>所有输出职业，增加被动饰品触发开启爆发选项/喝药选项</p>
+<p>痛苦术士增加斩杀爆发，进入吸魂斩杀阶段自动开启爆发喝药</p>
+<p>法师取消自动燃烧/冰冷血脉/奥术强化，增加饰品触发后爆发选项,法师增加战前召唤镜像</p>
+<p>鸟德嗜血喝药自动判定日食喝狂野魔法药水，月食喝加速药水,鸟德工程手套只在月食阶段开启</p>
+<p>增强萨满增加战前召唤幽灵狼（起手嗜血可以让幽灵狼吃到嗜血/英勇）</p>
+<p>DK增加开怪倒计时前8秒自动释放食尸鬼狂乱，并自动保持坐下以避免触发伟大</p>
+<p>修复热力炸弹只对boss使用</p>
+<p>增加坦克设置功能，通过选择队友头像右键菜单设置坦克职责【仅对AH有效】</p>
+<p>战斗贼增加被动饰品触发开杀戮盛宴/冲动/乱舞选项</p>
+<p>插入宏/cast2 现在支持鼠标指向目标/焦点目标</p>
+<p>进一步修复猫德循环，移除一个重复斜掠bug，增加猫德饰品触发狂暴</p>
+<p>鸟德增加站桩（虫群/月火术），可以根据神像可以选中非移动时是否打虫群或者月火术，且在移动中能反复给目标打月火术</p>
+<p>客户端版本更新4.2.9_429（2025.04.14）</p>
+<p>启动后自动更新，如果出现过期请重新下载安装！</p>
+<p>插件版本更新473（2025.04.13）</p>
+<p>新增双手邪DK循环，有好的双手武器用此模式打的很舒畅，TOC也能打个紫分，为下个版本橙斧准备了！</p>
+<p>修复小德鼠标指向战复没有生效问题！</p>
+<p>多目标扫描增加黑名单模式，冰霜之球将不再扫描为多目标</p>
+<p>插件版本更新472（2025.04.12）</p>
+<p>继续优化猫德循环，工作量不小，增加大量撕碎攻击条件！</p>
+<p>插件版本更新470（2025.04.11）</p>
+<p>经过几天的努力，总算修复了多目标自动扫描发呆的问题，现在可以放心使用了！</p>
+<p>插件版本更新467（2025.04.11）</p>
+<p>奶德/猫德/鸟德模式，增加鼠标指向战复</p>
+<p>术士多目标增加DOT（腐蚀术/诅咒/痛苦无常/献祭）最小HP，低于设定值不再上DOT</p>
+<p>完善邪DK标准模式符文武器只对BOSS或者小怪爆发选项开启时触发</p>
+<p>插件版本更新465（2025.04.10）</p>
+<p>修改爆发技能/喝药/饰品/工程手套为不占GCD技能循环，DPS更加强大</p>
+<p>加入通用热力炸弹，现在优先使用这个炸弹</p>
+<p>增加痛苦SS多线暗影箭补暗影之拥续腐蚀术（尽量双线使用，比如双子）</p>
+<p>插件版本更新464（2025.04.10）</p>
+<p>重做邪DK的标准模式，安装SIMC循环重制</p>
+<p>插件版本更新462（2025.04.09）</p>
+<p>完善奶骑三刷刺骨，现在奶骑能更好三刷刺骨了</p>
+<p>插件版本更新461（2025.04.08）</p>
+<p>牧师增加饰品爆发设置</p>
+<p>修复邪DK勾选AOE导致只打传染不打鲜血打击，导致dps问题</p>
+<p>插件版本更新460（2025.04.08）</p>
+<p>奶萨增加饰品爆发设置，现在可以像骑士牧师一样设置自动开启爆发饰品手套等</p>
+<p>多目标加入距离判定和施法失败阻止技能卡滞策略</p>
+<p>修复控制宏失效问题，现在可以队伍发送自动跟随等命令</p>
+<p>插件版本更新458（2025.04.06）</p>
+<p>优化法师连击优先打炎爆，后续更多优化将进行</p>
+<p>增强萨满增加萨满之怒蓝量设置</p>
+<p>修复爆发只有有目标的时候才开</p>
+<p>牧师暗影魔和消散，设置了小怪爆发小怪也能自动开，否则只对boss自动开</p>
+<p>完善防战优先级，将盾猛/复仇/毁灭优先级提前，增加起手仇恨</p>
+<p>战斗贼增加优先破甲及补破甲时间，以便保证合格的破甲工具人</p>
+<p>插件版本更新457（2025.04.06）</p>
+<p>紧急修复互动/自动跟随等错误，只需要重启客户端将自动更新</p>
+<p>插件版本更新456（2025.04.05）</p>
+<p>修正奶德在切换猫德再切回奶德不驱散问题</p>
+<p>细化奶骑兼职刺骨选择方式，选择兼职刺骨或者治疗3坦克，自动勾选阿努巴拉克坦克选项</p>
+<p>客户端版本更新4.2.7_427（2025.04.04）</p>
+<p>修复个别客户端证书导致运行停滞问题</p>
+<p>客户端版本更新4.2.6_426（2025.04.04）</p>
+<p>修复已知问题，增加软件安全性，修复个别windows家庭版本无法访问网络。</p>
+<p>插件版本更新455（2025.04.04）</p>
+<p>界面重大调整，现在设置和主页可以同时显示，方便查看调整技能选项，现在界面位置可以保存，重启能自动调整到上次的位置</p>
+<p>优化界面提示，现在运行/暂停/停止等状态可以清楚提示</p>
+<p>优化熊德重殴占用GCD问题，优化猫德狂暴</p>
+<p>增加奶骑治疗坦克的同时，可以兼职刷一个刺骨的功能</p>
+<p>牧师现在可以设置释放暗影魔蓝量，暗牧增加自动消失和蓝量设置</p>
+<p>奶骑/FQ的大牺牲现在是秒取消伤害分担</p>
+<p>修复TOC尾王脱战后，治疗设置没有复原问题</p>
+<p>狂暴战循环重制，大幅度提高DPS，修复战士英勇/顺劈有时会卡住的问题，现在不占GCD</p>
+<p>新增DKT 心打流派，DKT可轻松90+分以上，仇恨稳定伤害高</p>
+<p>客户端版本更新4.2.3_423（2025.03.30）</p>
+<p>启动后自动更新</p>
+<p>修复有些网吧无法解压插件问题，修复偶尔无法登录问题。如果自动更新出现问题</p>
+<p>插件版本更新449（2025.03.29）</p>
+<p>猎人增加多目标自动扫描打毒蛇钉刺</p>
+<p>法师增加多目标自动扫描上活动炸弹</p>
+<p>术士增加多目标自动扫描上腐蚀术/痛苦诅咒/痛苦无常/暗影箭骗灭杀等</p>
+<p>鸟德增加多目标自动扫描上精灵之火/月火术/虫群</p>
+<p>暗牧增加多目标自动扫描上吸血鬼之触/暗影术痛</p>
+<p>奶骑/FQ的大牺牲现在是秒取消伤害分担</p>
+<p>进一步优化猫德循环，战斗贼循环</p>
+<p>插件版本更新446（2025.03.29）</p>
+<p>*猫德/熊德循环重制，现在可以打紫分了！！</p>
+<p>*战斗贼循环重制，现在做好工具人还可打紫分了</p>
+<p>*所有输出职业提高反应速度，提升输出能力</p>
+<p>修复血DK不给邪恶狂热问题</p>
+<p>修复德鲁伊没学变熊技能导致鸟德和熊德变形出现困难</p>
+<p>惩戒骑清算不再影响其他技能输出反应</p>
+<p>NQ设置自疗最大70%，防止误设置导致一直自疗</p>
+<p>修复治疗刷刺骨战斗中灭团死亡后没有恢复设置</p>
+<p>插件版本更新445（2025.03.26）</p>
+<p>修复暗牧技能延迟问题</p>
+<p>修复CJQ清算之手占用GCD问题</p>
+<p>修复各职业有技能衔接延迟问题</p>
+<p>插件版本更新443（2025.03.26）</p>
+<p>萨满增加进攻驱散，可对目标/目标的目标/焦点目标/鼠标指向进行进攻驱散</p>
+<p>奶萨增加自动切换大地之盾，在战斗中，会根据当前BOSS的目标坦克来自动切换大地之盾</p>
+<p>萨满增加自动图腾，设置后会在战斗中自动施放元素的召唤图腾组</p>
+<p>惩戒骑神圣恳求开启从50%提高到80%，审判优先级提高到十字军之前，解决惩戒骑回蓝不足问题</p>
+<p>DK重铸，增加各种流派定义，目前支持传染流派/三一流派/延迟天打流派，功能正在完善中。</p>
+<p>修复盗贼嫁祸诀窍不执行错误</p>
+<p>修复惩戒骑TOC尾王圣闪自疗错误</p>
+<p>客户端版本更新4.1.19_419（2025.03.26）</p>
+<p>启动后自动更新，无需手动更新</p>
+<p>如果自动更新出现问题，请到https://www.autohelp.cc/download.html 下载更新</p>
+<p>插件版本更新441（2025.03.21）</p>
+<p>修复恢复萨满设置攻击后不自动攻击问题</p>
+<p>修复防骑自动打断错误</p>
+<p>插件版本更新438（2025.03.21）</p>
+<p>修复所有职业boss战偷药导致技能停滞问题！</p>
+<p>修复术士生命分流失效错误</p>
+<p>痛苦术士增加多目标法术选择：腐蚀术/痛苦诅咒/痛苦无常</p>
+<p>恶魔术士增加多目标法术选择：腐蚀术/痛苦诅咒/灭杀，可以对生命值低于35%的多目标使用一级暗影箭骗取灭杀增益</p>
+<p>TOC尾王三刷提示：奶骑选择三目标可以安全三刷刺骨</p>
+<p>MS在爆发英勇/嗜血支持下，可以轻松三刷刺骨</p>
+<p>奶德有妙触天赋雕文支持，选择治疗之触可以轻松三刷，如果只有滋养天赋，插雕文，急速达到856可以轻松三刷刺骨</p>
+<p>插件版本更新436（2025.03.20）</p>
+<p>新版本自动更新，完全匹配最新WLK版本</p>
+<p>法师增加自动法术偷取，可以设置焦点，鼠标指向，法师现在可以鼠标指向/焦点目标/目标的目标等上活动炸弹，法术吸取</p>
+<p>防骑增加自动打断（亡灵恶魔/神圣愤怒，飞盾，血精灵奥术洪流）</p>
+<p>防骑增加尾王打断选择（暗影突击/打断下地【潜地】）</p>
+<p>奶骑新增3刷刺骨功能，自动给最后一个道标，刷1，2，具体使用将鼠标移到自动刺骨看说明 奶骑如果选择2刷刺骨，请将道标给坦克</p>
+<p>奶骑新增单奶刷3坦克功能，选择设置里面的【单奶刷T】，会自动给你设置的主T上道标，轮流用圣光术治疗2个副TANK</p>
+<p>术士多目标痛新增焦点目标，目标的目标鼠标指向等</p>
+<p>MS增加进攻驱散，可以自动将目标/焦点目标/鼠标指向目标/目标的目标/焦点的目标/目标的目标的目标/鼠标指向目标的目标（比如你指向队友，驱散队友的目标）的增益法术进行自动驱散</p>
+<p>插件版本更新430（2025.03.10）</p>
+<p>增加牧师/骑士/奶德/奶萨对TOC 血肉成灰自动治疗</p>
+<p>四大治疗职业可设置刺骨编号，自动刷刺骨</p>
+<p>增加奶骑尾王自动治疗，自动优化设置，自动开启神恩饰品等爆发治疗坦克</p>
+            </div>
+        </div>
+    `;
+
+            // 隐藏所有内容区域
+            hideAllSections();
+
+            // 设置新内容
+            var contentDiv = document.getElementById('log-content');
+            contentDiv.innerHTML = tempContent;
+            contentDiv.classList.add('active');
+
+            // 添加恢复函数到window对象
+            window.restoreLogContent = function () {
+                document.getElementById('log-content').innerHTML = originalLogContent;
+            };
+        }
+
+        function showW21Log() {
+            // 保存原始日志内容
+            var originalLogContent = document.getElementById('log-content').innerHTML;
+
+            // 创建临时显示内容
+            var tempContent = `
+        <div style="position: relative; min-height: 300px;">
+            <button onclick="window.showSection('log'); restoreLogContent();"
+                    style="position: absolute; top: 10px; right: 10px; padding: 8px 15px; 
+                           background-color: #2c2c2c; color: white; border: none; 
+                           border-radius: 4px; cursor: pointer;">返回</button>
+            <div style="color:white; padding:50px;">
+                <h2>【W2】术士更新日志</h2>
+<p>5.09.0的更新</p>
+<p>新开关腐蚀等4T10, 起手时, 当身上有4T10buff才打腐蚀术, 只对boss生效. 慎用, 长时间不触发4T10很尴尬. 没4T10不影响</p>
+<p>5.08.0的更新</p>
+<p>修复永冻冰晶小概率开在腐蚀术之后的bug</p>
+<p>修复普通模式进剑发呆的问题</p>
+<p>5.07.0的更新</p>
+<p>1．永冻冰晶支持</p>
+<p>腐蚀术时自动使用冰晶</p>
+<p>由于是boss战中才使用, 如果要在城里模拟, 需要勾选爆发配置面板的木桩测试</p>
+<p>对于战斗时间比较长的战斗(>4分钟), 最好关闭自动小爆发, 因为自动小爆发会使用饰品, 导致在boss 35%血的时候, 冰晶cd.</p>
+<p>由于冰晶的暴击快照比较强力(20%暴击), 在快照冰晶后, 在 冰晶cd的情况下, 35%的时候可能不会重新上腐蚀术.</p>
+<p>2．ICC相关</p>
+<p>议会自动切目标开关</p>
+<p>议会鼠标暗影箭开关</p>
+<p>女王跑蜂拥开关</p>
+<p>女王连线火箭靴开关</p>
+<p>冰龙动荡停手层数</p>
+<p>LK跑污染开关</p>
+<p>多线排除目标添加"萨鲁法尔大王","穆拉丁·铜须","达尔纳文"</p>
+<p>5.06.0的更新</p>
+<p>冰龙P2, 普通模式中了狂咒不停手</p>
+<p>冰龙P2, 狂咒停手开关</p>
+<p>冰龙P2中了冰霜道标不传送</p>
+<p>冰龙自动传送开关</p>
+<p>5.05.0的更新</p>
+<p>修复双子小概率不传送, 传送滞后的bug</p>
+<p>新增多线刷新腐蚀, 多线叠暗拥的开关(之前有这2个逻辑, 但是没开关)</p>
+<p>多线刷新腐蚀的意思是, 是否用暗影箭刷新多线目标的腐蚀术, 如果关了, 就是等多线目标的腐蚀术掉了再补一个. 如果开, 就是在掉之前用暗影箭刷新.</p>
+<p>多线叠暗拥的意思是, 在主目标dot满了, 暗拥3层的情况下, 多线目标的暗拥没有3层的时候, 是否去叠多线目标的暗拥</p>
+<p>修复恶魔术老二, 小强不多线偷灭杀的bug</p>
+<p>恶魔术老一p2阶段不使用厄运, 把厄运留给冰吼</p>
+<p>5.03.0的更新</p>
+<p>修复少量用户窗口模式没反应的问题</p>
+<p>修复小概率卡技能的bug</p>
+<p>5.02.0的更新</p>
+<p>修复一个多线刷新腐蚀术优先级过高的bug</p>
+<p>简单来说, 小强焦点种子会打更多的种子.</p>
+<p>具体来说, 之前版本的逻辑是, 多线刷新腐蚀术优先级高于焦点种子, 导致在焦点种子的时候, 会中断焦点种子去给其他的目标刷新腐蚀术, 目前来看, 这是一个dps降低, 因为能打焦点种子的时间窗口比较短, 用暗影箭多线刷新腐蚀是在浪费这一窗口</p>
+<p>双子, 小强 地狱火放不出来的, 不要仰视boss, 最好俯视boss, 因为地狱火砸的地方是你的视角, 鼠标, 地面的连线. 如果视角是平视或者仰视, 地狱火可能砸不出去</p>
+<p>修复最新版本win11启动器报错的bug</p>
+<p>修复乌巅乌堡报错的bug</p>
+<p>5.01.0的更新</p>
+<p>适配幻化客户端, 修复闪退, 配置按钮无效等bug</p>
+<p>老二女王之吻骑士开光掌,不用特化(没有光掌还是使用特化技能)</p>
+<p>4.21.1的更新</p>
+<p>更新内容</p>
+<p>修复老二不打门的bug</p>
+<p>修复小强boss面板有时候不出来的bug. 现在改为进入小强的洞穴, 就显示boss面板</p>
+<p>小强p3默认使用满级分流, 中了刺骨才使用低级分流,</p>
+<p>双子急速大于225%, 使用满级暗影箭刷新焦点腐蚀</p>
+<p>小强自动关闭多线吸魂</p>
+<p>双子没有自动传送的小伙伴, 可以试试</p>
+<p>1.站定起手, 双子是瞎子, 离boss30码, 不会add. </p>
+<p>2.进boss战后再起手. </p>
+<p>因为没进boss战, 没有厄运特化, 如果移动中第一个技能小概率打了痛苦诅咒, 会导致自动传送失效, 但是不影响后续循环.</p>
+<p>站定起手, 第一个技能是暗影箭, 暗影箭打完了, 肯定进boss战了, 就有boss特化了.</p>
+<p>修复网易有爱插件冲突, 导致低血量吃糖的时候卡住发呆的bug(特别是小强P3) </p>
+<p>4.20.0的更新</p>
+<p>更新内容</p>
+<p>修复双子起手小概率不传送的bug</p>
+<p>小强H模式才为P3蓄蓝, 普通模式不蓄蓝</p>
+<p>小强H模式P3才使用4级分流, 普通模式用满级分流</p>
+<p>新增H小强P3蓄蓝阈值配置项, 默认0.9, 打零下地的可以配置为0.1(约等于不蓄蓝)</p>
+<p>新增H小强P3是否用低级分流开关, 默认开, 如果对团队的奶有信心, 可以关掉</p>
+<p>阵营冠军H模式自动关闭多线</p>
+<p>焦点死了, 会自动取消种子模式勾选</p>
+<p>4.19.1的更新</p>
+<p>更新内容</p>
+<p>冰吼击飞昏迷后不断暗拥. </p>
+<p>双子新开关"自动传送", 开打时, 当一套dot打完(包括一个腐蚀术, 一个无常, 一个厄运), 自动传送, 开火箭靴. </p>
+<p>修复双子厄运miss导致痛苦诅咒卡住的bug</p>
+<p>修复老二只打1个地狱火的bug(应该是打2个)</p>
+<p>修复腐蚀术debuff结束时间计算错误的bug</p>
+<p>4.18.0的更新</p>
+<p>更新内容</p>
+<p>修复冰吼厄运未命中会发呆的bug</p>
+<p>双子新配置项, 续腐蚀提前量, 现在的暗影箭续腐蚀比较极限, 如果网路比较差, 可以适当增大此值, 单位秒</p>
+<p>修复启动器win11 24h2最新版本报错的问题</p>
+<p>4.17.0的更新</p>
+<p>更新内容</p>
+<p>修复双子断腐蚀术</p>
+<p>新开关, 老二只打第一个门, 火山, 女王, 前2个地狱火. 毒瘤开关, 非冲分不要勾选</p>
+<p>新开关, 阿努巴拉克小怪只打60w伤害, 毒瘤开关, 非冲分不要勾选</p>
+<p>阿努巴拉克进入p3前, 会把蓝量拉到90%以上, 进p3后会使用4级生命分流, 以免暴毙</p>
+<p>阿努巴拉克进入p3后自动取消血量buff(/cancelaura 命令怒吼 /cancelaura 坚韧祷言 /cancelaura 真言术：韧)</p>
+<p>4.16.0的更新</p>
+<p>更新内容</p>
+<p>腐蚀术结束时间精确计算</p>
+<p>老二沉默放灼热之痛</p>
+<p>修复"同色破盾"开关点不上的bug</p>
+<p>老一被冰吼冻住后, 使用人类种族天赋解(其他种族不影响)</p>
+<p>冰吼昏迷结束后, 自动传送到场地中央(需要提前放一个法阵), 可以比别人早1秒打到boss(传送没有无敌帧, 不能躲昏迷)</p>
+<p>开打的时候自动给冰吼一个厄运, 正好在易伤的时候炸(仅针对痛苦术)</p>
+<p>双子新开关, 暗影防护结界, 当boss释放黑色漩涡, 但你是白色的时候, 自动上一个暗影防护结界, 浪费一个GCD, 降低团队治疗压力, 提升玩家存活率, 强力建议保持勾选</p>
+<p>4.15.2的更新</p>
+<p>更新内容</p>
+<p>TOC小怪多线优化</p>
+<p>TOC自动地狱火</p>
+<p>修复双子腐蚀术小概率中断的bug</p>
+<p>双子新增开关"同色破盾", 具体说明见游戏内开关的说明</p>
+<p>4.14.1的更新</p>
+<p>更新内容</p>
+<p>TOC双子双线腐蚀</p>
+<p>    使用1级暗影箭续焦点腐蚀</p>
+<p>    根据身上的精粹, 自动设置目标和焦点 </p>
+<p>4.13.1的更新</p>
+<p>更新内容</p>
+<p>修复猫女保护之手后, 卡住的bug</p>
+<p>添加新配置项, 自动取消嫁祸, 默认关</p>
+<p>修复windows11闪退的问题</p>
+<p>修复游戏窗口模式无反应的问题</p>
+<p>自带反扫描, 无需改名字, 无需改特征, 无需火绒, 无需Guest用户. </p>
+<p>程序不要放在桌面(快捷方式可以放桌面)</p>
+<p>程序可能会被杀毒误报, 请点击信任</p>
+<p>如果被火绒杀掉的, 请在隔离区添加信任</p>
+<p>4.10的更新</p>
+<p>更新内容</p>
+<p>修复霍迪尔吃雷云后, 包里没狂野魔法药水, 卡住了的bug</p>
+<p>修复xt002焦点炸弹人的bug</p>
+<p>修复快捷键不能保存的bug</p>
+<p>添加"恢复默认值"按钮, 可以重置配置</p>
+<p>恶魔术打议会, 灭火时不上厄运, 因为太快了, 厄运爆不了</p>
+<p>配置页面提供厄运诅咒排除目标配置</p>
+<p>4.9的更新</p>
+<p>更新内容</p>
+<p>修正了攒片功能抽搐的bug</p>
+<p>修正攒片功能的30个片, 不包含银行里的片的bug. 现在包含银行里的片</p>
+<p>修正配置项"吸魂断条提前量"不生效的bug</p>
+<p>观星新增一个坍缩星冲分相关的开关, 默认关</p>
+<p>10人修星将使用7级灼热之痛(满级是9级)</p>
+<p>大爆发加入使用物品"碎裂的能量核心", 不冲分的人可以忽略, 不影响正常使用</p>
+<p>XT002中的火花不再多线暗影箭</p>
+<p>最近奥杜尔削弱的厉害, 很多人发现35%的时候没有重新上腐蚀术. </p>
+<p>新增腐蚀术后自动换装功能(不冲分的可以忽略)</p>
+<p>  1. 装备管理器保存一套装备, 命名法伤.</p>
+<p>  2. 配置里面勾选自动换装.</p>
+<p>  3. boss战前, 换上暴击武器, 暴击魔杖, 暴击药水(大概是极效思维药剂和致命打击药剂).</p>
+<p>  4. 在boss战中, 会在没有冰霜巨龙合剂buff时, 上了腐蚀术后, 自动装备"法伤"装备, 并喝冰霜巨龙合剂.</p>
+<p>  5. 由于木桩不算boss战, 如果需要测试, 请勾选配置->爆发设置->木桩测试, 模拟boss战. </p>
+<p>4.8的更新</p>
+<p>更新内容</p>
+<p>XT002战斗中废料机器人, 爆破机器人 被排除多线</p>
+<p>钢铁议会, 观星 自动关闭暗影烈焰</p>
+<p>配置项添加技能排除目标. </p>
+<p>技能是否打, 是根据目标的预估死亡时间来判断的, 但由于各个团队打法不同, 死亡时间有可能预估错误, 导致上了不想要的技能. 比如XT002的火花, 上一秒估计能活13秒, 所以上了个痛苦无常, 下一秒被集火打死了, 痛苦无常一跳没跳, 浪费一个GCD. 此配置项可以定义一些技能的强制排除目标, 用逗号,空格,换行分割</p>
+<p>把芙蕾雅设为焦点, 当第2个大树的蘑菇出来后, 会给芙蕾雅上腐蚀术, 然后用吸魂续腐蚀</p>
+<p>钢铁议会蓝圈焦点厄运诅咒, 现在越打越快, 已经上不了2个厄运, 建议开战直接设置大个焦点, 厄运给大个.</p>
+<p>25人痛苦术修星, 如果装等大于228, 将自动使用低级腐蚀术修星.</p>
+<p>尤格萨隆p3自动转身, 不再转镜头, 只转身, 避免头晕. 修正了一些比较卡的电脑转身失败的问题.</p>
+<p>配置项新增攒片开关, 默认关.  当不是boss战, 片少于30, 吸魂攒片.(这个有bug, 会抽搐, 下个版本修复)</p>
+<p>霍迪尔新雷云出来了后, 自动取消身上的雷云</p>
+<p>xt002黑水结束, 自动传送</p>
+<p>4.7.2的更新</p>
+<p>更新内容</p>
+<p>修正不能传送的bug, 只用替换插件, 不用替换exe</p>
+<p>4.7.1的更新</p>
+<p>更新内容</p>
+<p>修正芙蕾雅召的大树不打鬼影的bug</p>
+<p>芙蕾雅的自动地狱火留到p2</p>
+<p>修正掌炉弹起落地后还传送的bug</p>
+<p>修正掌炉boss中了语言诅咒,中毒等debuff后, 施法时间变长导致的断条时机错误被沉默的bug</p>
+<p>修正放地狱火时被沉默的bug</p>
+<p>修正XT002打的太快, 在p1阶段放地狱火的bug, 现在一定是p2才放地狱火</p>
+<p>修复米米尔隆p1洒水的时候, 吸魂抽搐的bug</p>
+<p>将军的自动大爆发留到p2</p>
+<p>暗影烈焰和猪头喷加入开关, 默认开</p>
+<p>多目标暗拥保持开关, 默认关. 多线不再强制保持副目标暗拥, 现在的急速低, 强制保持多线暗拥会导致无常和痛苦诅咒没机会打出去. </p>
+<p>4.7的更新</p>
+<p>更新内容</p>
+<p>修正小概率尤格萨隆p3转身卡住狂掉心智的bug, 现在真的不会被控了.</p>
+<p>尤格萨隆p3自动转身开关, 安全心智阈值可配置</p>
+<p>新增快捷面板, 方便大家在战斗时, 实时调整配置. boss战会载入该boss的特化. 色块旁边有按钮可以隐藏/显示面板</p>
+<p>米米尔隆p1洒水急速变低前会来一个吸魂, 并且不会主动断, 安全度过施法减速期.</p>
+<p>循环加入死亡缠绕和猪头喷, 主要用在移动中填充, 和boss倒地前, 最后一跳吸魂时间不够的时候. </p>
+<p>10人修星使用9级腐蚀术, 避免dot伤害过高, 总伤害过量</p>
+<p>程序挂起后, 小键盘恢复到可用状态</p>
+<p>4.6.1的更新</p>
+<p>更新内容</p>
+<p>修正少数人痛苦术25人修星1修3, 痛苦无常断条, 读不出来的bug</p>
+<p>修正了观星进洞后, 如果是开火状态, 可能会打小怪的bug, 现在就算主目标是小怪, 也不会打了.</p>
+<p>托里姆p1禁用炸弹, p2开启炸弹</p>
+<p>宝库风暴守护自动禁用多线</p>
+<p>掌炉, 加入传送. </p>
+<p>锋鳞取消延迟传送, 现在是实时传送. (我记得以前在台服的时候, 实时传送会被二次击飞, 但现在好像修了. 所以现在是实时传送)</p>
+<p>4.6的更新</p>
+<p>更新内容</p>
+<p>支持痛苦术10人修星, 具体手法是用一个腐蚀术, 跳完后, 用8级灼热之痛补伤害.</p>
+<p>修复少数人恶魔术10人修星不用灼热之痛补伤害的问题</p>
+<p>观星新增"爆星"配置, 坍缩星直接打死, 不修血.</p>
+<p>修复3树小概率被沉默的bug</p>
+<p>真修复尤格萨隆p1打队友的bug</p>
+<p>真修复将军前小怪给队友上dot的问题</p>
+<p>修复尤格萨隆低理智进入保守模式失败的bug,</p>
+<p>掌炉取消传送, 请去水池头顶墙</p>
+<p>钢铁议会, 身上如果有双篮圈buff, 会自动给另外2个怪上腐蚀, 并用吸魂刷新. 断钢一般有T拉着, 所以肯定在多目标里. 符文大师莫尔基姆需要设个焦点, 保证他在多目标里. 刷新腐蚀时注意面向这2个boss,</p>
+<p>新增控制分流的2个配置参数</p>
+<p>新增控制多线目标的多个配置参数</p>
+<p>4.5.3的更新</p>
+<p>更新内容</p>
+<p>将军省蓝循环加入恶魔术支持</p>
+<p>掌炉加入举高高传送功能</p>
+<p>修正了尤格萨隆p1打队友的bug</p>
+<p>修正了尤格萨隆p2给boss上腐蚀术的bug</p>
+<p>修正了将军前小怪给队友上dot的问题</p>
+<p>修正XT-002心脏开大爆发的问题</p>
+<p>保持3树小怪的多线暗拥</p>
+<p>4.5.2的更新</p>
+<p>更新内容</p>
+<p>修正三树发呆bug</p>
+<p>修正将军魔杖, 省蓝循环bug.</p>
+<p>4.5.1的更新</p>
+<p>更新内容</p>
+<p>修正了大爆发卡住的bug</p>
+<p>奥杜尔特化增强 </p>
+<p>4.5的更新</p>
+<p>更新内容</p>
+<p>更新奥杜尔boss特化</p>
+<p>4.3的更新</p>
+<p>更新内容</p>
+<p>修正了因为TMW,Plater使用大灾变的距离判断库, 导致30码距离发呆的问题</p>
+<p>修正了极少数用户, 因为色块和最上方有空隙, 导致发呆的问题.</p>
+<p>修正了极少数情况, 开火状态, 切出游戏会报错的问题</p>
+<p>色块旁边加了一个配置按钮, 可以快速弹出配置界面</p>
+<p>新增一个自动爆发配置界面</p>
+<p>修正了开场离boss较远, 连续打2个腐蚀术的问题</p>
+<p>4.2.1的更新</p>
+<p>Bug修复</p>
+<p>修正2k,4k显示器窗口模式无反应bug,</p>
+<p>不再需要外部依赖包,</p>
+<p>修正术士起手aoe打其技能再打种子的bug</p>
+<p>4.2的更新</p>
+<p>4.2版本需要依赖外部库, 把!!!Libs放到插件目录Addons下,</p>
+<p>（一）ahk更新</p>
+<p>现在可以自动识别游戏的全屏模式和窗口模式, 不需要再在ahk.txt里配置</p>
+<p>（二）界面更新</p>
+<p>增加了图形界面开关, 同时也支持命令方式</p>
+<p>（三）Bug修复</p>
+<p>修复了克总心控杀队友的bug</p>
+<p>调整了多线续暗拥的优先级</p>
+<p>增加了放地狱火的boss数量</p>
+<p>把5人本的boss做为boss对待(以前只把83级的怪看做boss)</p>
+    </div>
+ </div>
+    `;
+
+            // 隐藏所有内容区域
+            hideAllSections();
+
+            // 设置新内容
+            var contentDiv = document.getElementById('log-content');
+            contentDiv.innerHTML = tempContent;
+            contentDiv.classList.add('active');
+
+            // 添加恢复函数到window对象
+            window.restoreLogContent = function () {
+                document.getElementById('log-content').innerHTML = originalLogContent;
+            };
+        }
+
+        function showW22Log() {
+            // 保存原始日志内容
+            var originalLogContent = document.getElementById('log-content').innerHTML;
+
+            // 创建临时显示内容
+            var tempContent = `
+        <div style="position: relative; min-height: 300px;">
+            <button onclick="window.showSection('log'); restoreLogContent();"
+                    style="position: absolute; top: 10px; right: 10px; padding: 8px 15px; 
+                           background-color: #2c2c2c; color: white; border: none; 
+                           border-radius: 4px; cursor: pointer;">返回</button>
+            <div style="color:white; padding:50px;">
+                <h2>【W2】法师更新日志</h2>
+<p>3.06.0版本的更新</p>
+<p>老二无论是否勾选解诅咒都会给自己解</p>
+<p>修复老二中麻痹诅咒继续读条的bug</p>
+<p>3.05.0版本的更新</p>
+<p>修复女王蜂拥之影开冰箱的bug</p>
+<p>修复普通模式进剑发呆的问题</p>
+<p>3.04.0版本的更新</p>
+<p>老二新增羊, 偷buff, 解诅咒开关</p>
+<p>老二修复不给自己解诅咒的bug</p>
+<p>烂肠新增放屁冰箱开关</p>
+<p>萨鲁法尔新增印记冰箱开关</p>
+<p>教授新增隐身开关</p>
+<p>议会新增鼠标冰枪开关,自动切目标开关</p>
+<p>女王新增跑蜂拥, 连线火箭靴开关</p>
+<p>冰龙新增狂咒冰箱, 狂咒停手, 动荡停手层数开关</p>
+<p>巫妖王新增跑污染开关</p>
+<p>3.02.0版本的更新</p>
+<p>教授普通模式第2次转阶段自动隐身</p>
+<p>多线排除目标添加"萨鲁法尔大王","穆拉丁·铜须","达尔纳文"</p>
+<p>3.01.0版本的更新</p>
+<p>修复toc冰吼, 老二发呆的bug</p>
+<p>3.00.0版本的更新</p>
+<p>修复老二卡死的bug</p>
+<p>2.04.0版本的更新</p>
+<p>更新内容</p>
+<p>修复了一个小括号判断错误的bug, 可以减少浪费法术连击的概率</p>
+<p>这个bug所有的fojji小括号wa都有, 我后续出一个修正版wa</p>
+<p>修复少量用户窗口模式没反应的问题</p>
+<p>修复小概率卡技能的bug</p>
+<p>2.03.0版本的更新</p>
+<p>更新内容</p>
+<p>当有多个怪的时候, 提高炎爆的优先级.</p>
+<p>简单来说, 会打更多炎爆, 减少大括号浪费.</p>
+<p>具体来说, 之前版本的逻辑是, 当只有单大括号, 活动炸弹的优先级高于炎爆, 这在只有1个怪的时候没问题. 但是当有多个怪, 有大括号, 并且炸弹要炸了的时候, 如果炸弹优先级还是高于炎爆的话, 由于炸弹可能连续暴击, 导致浪费一个大括号. 所以现在改为, 当有多个怪的时候, 并且炸弹要炸了, 炎爆优先级会提高</p>
+<p>有燃烧的时候, 不放火冲</p>
+<p>修复偷到燃烧后, 仍然会自动释放燃烧的bug</p>
+<p>2.02.0版本的更新</p>
+<p>更新内容</p>
+<p>修复女王之吻发呆, 聊天框乱说话的bug</p>
+<p>冰喉易伤期间不打活动炸弹只打火球炎爆</p>
+<p>新增插入隐身, 快捷键x, 在已经隐身的时候, 是取消隐身</p>
+<p>修复乌巅乌堡中冰后, 循环助手退出的bug</p>
+<p>2.01.0版本的更新</p>
+<p>更新内容</p>
+<p>适配幻化客户端, 修复闪退, 配置按钮无效等bug</p>
+<p>老二女王之吻骑士开光掌,不用特化(没有光掌还是使用特化技能)</p>
+<p>1.09.1版本的更新</p>
+<p>更新内容</p>
+<p>修复了toc老二卡住的bug</p>
+<p>1.09.0版本的更新</p>
+<p>更新内容</p>
+<p>老二wcl开关, 只打第一个门, 火山, 女王, 前2个地狱火. 毒瘤开关, 非冲分不要勾选</p>
+<p>小强60w中虫开关</p>
+<p>老二女王之吻特化寒冰箭</p>
+<p>插入冰箱, 在已经冰箱的时候, 是取消冰箱</p>
+<p>新开关, 多线炎爆</p>
+<p>老二如果身上有虚空之能buff, 但是持续时间小于12秒, 则不上活动炸弹(因为炸弹的dot是快照机制, 爆炸不是快照机制)</p>
+<p>老二自动偷盾开关, 默认开. 帮别的法师造神的时候可以关掉</p>
+<p>1.08.0版本的更新</p>
+<p>更新内容</p>
+<p>老二新配置项, 不偷buff时间, boss死亡时间小于多少秒, 就不偷了, 默认10</p>
+<p>新增插入冰箱, 快捷键u</p>
+<p>修复启动器win11 24h2最新版本报错的问题</p>
+<p>1.07.2版本的更新</p>
+<p>更新内容</p>
+<p>只有p3中了刺骨才会冰箱, p2跑冰中了不会冰箱</p>
+<p>1.07.0版本的更新</p>
+<p>更新内容</p>
+<p>老一被冰吼冻住后, 使用人类种族天赋或者闪现</p>
+<p>老1中麻痹毒素不冰箱, 冰箱留给冰吼昏迷</p>
+<p>冰吼冰箱躲昏迷</p>
+<p>双子双线炸弹, 2个炸弹间隔3秒以上, 避免同时炸</p>
+<p>双子新开关"同色破盾"</p>
+<p>1.06.1版本的更新</p>
+<p>更新内容</p>
+<p>多线炎爆(这个不是toc特化. uld,naxx,木桩都可以用)</p>
+<p>老二自动偷buff</p>
+<p>刺骨之寒,麻痹毒素,军团烈焰自动冰箱, 然后自动解冰箱</p>
+<p>1.05.0版本的更新</p>
+<p>更新内容</p>
+<p>修复windows11闪退的问题</p>
+<p>修复游戏窗口模式无反应的问题</p>
+<p>自带反扫描, 无需改名字, 无需改特征, 无需火绒, 无需Guest用户. </p>
+<p>程序不要放在桌面(快捷方式可以放桌面)</p>
+<p>程序可能会被杀毒误报, 请点击信任</p>
+<p>如果被火绒杀掉的, 请在隔离区添加信任</p>
+<p>1.03版本的更新</p>
+<p>更新内容</p>
+<p>更新了活动炸弹的循环逻辑.</p>
+<p>1.小怪死太快, 多线的时候不再给小怪上活动炸弹</p>
+<p>2.配置里面新增了活动炸弹排除目标, 可以精确控制哪些怪不上活动炸弹</p>
+<p>奥杜尔做了特化.</p>
+<p>1.多线的自动设置</p>
+<p>2.自动断条防沉默</p>
+<p>3.尤格萨隆自动转身</p>
+<p>4.将军省蓝循环</p>
+<p>1.02版本的更新</p>
+<p>更新内容</p>
+<p>修正了因为TMW,Plater使用大灾变的距离判断库, 导致30码距离发呆的问题</p>
+<p>修正了极少数用户, 因为色块和最上方有空隙, 导致发呆的问题.</p>
+<p>修正了极少数情况, 开火状态, 切出游戏会报错的问题</p>
+<p>色块旁边加了一个配置按钮, 可以快速弹出配置界面</p>
+<p>新增一个自动爆发配置界面</p>
+    </div>
+ </div>
+    `;
+
+            // 隐藏所有内容区域
+            hideAllSections();
+
+            // 设置新内容
+            var contentDiv = document.getElementById('log-content');
+            contentDiv.innerHTML = tempContent;
+            contentDiv.classList.add('active');
+
+            // 添加恢复函数到window对象
+            window.restoreLogContent = function () {
+                document.getElementById('log-content').innerHTML = originalLogContent;
+            };
+        }
+
+        function showW23Log() {
+            // 保存原始日志内容
+            var originalLogContent = document.getElementById('log-content').innerHTML;
+
+            // 创建临时显示内容
+            var tempContent = `
+        <div style="position: relative; min-height: 300px;">
+            <button onclick="window.showSection('log'); restoreLogContent();"
+                    style="position: absolute; top: 10px; right: 10px; padding: 8px 15px; 
+                           background-color: #2c2c2c; color: white; border: none; 
+                           border-radius: 4px; cursor: pointer;">返回</button>
+            <div style="color:white; padding:50px;">
+                <h2>【W2】牧师更新日志</h2>
+<p>3.06.0版本的更新</p>
+<p>1、修复3.05版本程序报错的问题</p>
+<p>3.05.0版本的更新</p>
+<p>2、修正4T10后嗜血，灌注的判断</p>
+<p>3、LK场景P3阶段自动关闭多线痛</p>
+<p>3.04.0版本的更新</p>
+<p>1、特化烂肠毒气阶段自动消散并取消</p>
+<p>2、优化4T10后的震爆机制（4T10后不是不打震爆，而是根据法伤 急速 GCD的综合判断来选择性不打震爆，大家可以自己去下个震爆提示的WA测试）</p>
+<p>3.03.0版本的更新</p>
+<p>1、修复暗牧4t10断鞭不准确的bug</p>
+<p>2、修复插入渐隐后停手不攻击的问题</p>
+<p>3、新增取消消散，设定的快捷键按一下是消散 按第二下是取消消散</p>
+<p>4、特化议会战斗场景，自动关闭多线，当前目标会跟着Boss转换自动切换，攻击目标屏蔽了黑暗之核</p>
+<p>5、特化女王战斗场景，中连线后自动火箭靴，Boss上天后人类自动解除恐惧</p>
+<p>6、特化玛洛加尔领主战斗场景，自动关闭多线痛和团队协助目标，仅保留鼠标指向多线触骨刺，战斗结束后恢复设置</p>
+<p>7、特化萨鲁法尔战斗场景，自动关闭多线痛，战斗结束后恢复设置</p>
+<p>8、特化冰龙战斗场景，H模式自己勾选中狂咒是否需要停手</p>
+<p>9、特化冰龙战斗场景，动荡不停手自动消散</p>
+<p>3.01.0版本的更新</p>
+<p>修正ICC一些boss特化报错的bug</p>
+<p>2.03.0版本的更新</p>
+<p>更新内容</p>
+<p>修复少量用户窗口模式没反应的问题</p>
+<p>修复小概率卡技能的bug</p>
+<p>2.02.0版本的更新</p>
+<p>更新内容</p>
+<p>修复最新版本win11启动器报错的bug</p>
+<p>修复乌巅乌堡报错的bug</p>
+<p>2.01.0版本的更新</p>
+<p>更新内容</p>
+<p>适配幻化客户端, 修复闪退, 配置按钮无效等bug</p>
+<p>老二女王之吻骑士开光掌,不用特化(没有光掌还是使用特化技能)</p>
+<p>1.08.0版本的更新</p>
+<p>更新内容</p>
+<p>老二wcl开关, 只打第一个门, 火山, 女王, 前2个地狱火. 毒瘤开关, 非冲分不要勾选</p>
+<p>小强60w中虫开关</p>
+<p>老二女王之吻大驱特化</p>
+<p>修复双子断痛的bug</p>
+<p>修复奥杜尔将军灭自杀bug</p>
+<p>1.07.0版本的更新</p>
+<p>更新内容</p>
+<p>修复联盟2t9识别失败, 导致双子不双线触的bug(部落无此bug)</p>
+<p>触绑定手套</p>
+<p>移除主循环中排除震爆的开关, 改为智能判断, 没有4t8, 极速大于1.875, 不使用震爆, 其他时候正常震爆</p>
+<p>1.06.0版本的更新</p>
+<p>更新内容</p>
+<p>检测到2t9时, 双子双线触</p>
+<p>新增开关, 不用心灵震爆, 主循环排除震爆, 默认否</p>
+<p>修复启动器win11 24h2最新版本报错的问题</p>
+<p>1.05.0版本的更新</p>
+<p>更新内容</p>
+<p>toc小怪多线优化</p>
+<p>双子双线痛(用法同术士)</p>
+<p>双子同色破盾</p>
+<p>1.04.0版本的更新</p>
+<p>更新内容</p>
+<p>修复windows11闪退的问题</p>
+<p>修复游戏窗口模式无反应的问题</p>
+<p>自带反扫描, 无需改名字, 无需改特征, 无需火绒, 无需Guest用户. </p>
+<p>程序不要放在桌面(快捷方式可以放桌面)</p>
+<p>程序可能会被杀毒误报, 请点击信任</p>
+<p>如果被火绒杀掉的, 请在隔离区添加信任</p>
+<p>1.2.1版本的更新</p>
+<p>更新内容</p>
+<p>修正老一上台子不打炮台的bug</p>
+<p>修正了每隔15秒给主目标上痛的bug</p>
+<p>修正了多目标情况下, 不断给副目标打鞭子的bug</p>
+<p>1.2版本的更新</p>
+<p>更新内容</p>
+<p>突击机器人不上病, 因为免疫</p>
+<p>修正了心灵震爆后的技能延时</p>
+<p>从aoe模式切到单体模式更平滑</p>
+<p>修正10人修星触无限断条的bug</p>
+<p>修正快捷键不能保存的bug</p>
+<p>添加"恢复默认值"按钮, 可以重置配置</p>
+    </div>
+ </div>
+    `;
+
+            // 隐藏所有内容区域
+            hideAllSections();
+
+            // 设置新内容
+            var contentDiv = document.getElementById('log-content');
+            contentDiv.innerHTML = tempContent;
+            contentDiv.classList.add('active');
+
+            // 添加恢复函数到window对象
+            window.restoreLogContent = function () {
+                document.getElementById('log-content').innerHTML = originalLogContent;
+            };
+        }
+
+        function showW24Log() {
+            // 保存原始日志内容
+            var originalLogContent = document.getElementById('log-content').innerHTML;
+
+            // 创建临时显示内容
+            var tempContent = `
+        <div style="position: relative; min-height: 300px;">
+            <button onclick="window.showSection('log'); restoreLogContent();"
+                    style="position: absolute; top: 10px; right: 10px; padding: 8px 15px; 
+                           background-color: #2c2c2c; color: white; border: none; 
+                           border-radius: 4px; cursor: pointer;">返回</button>
+            <div style="color:white; padding:50px;">
+                <h2>【W2】猎人更新日志</h2>
+<p>4.08.0版本的更新</p>
+<p>修复射击猎教授冰龙发呆的bug</p>
+<p>4.07.0版本的更新</p>
+<p>1、教授转阶段刷新钉刺</p>
+<p>2、冰龙上天刷新钉刺</p>
+<p>3、优化女王血箭乱舞的威慑时机</p>
+<p>4、优化风筝僵尸</p>
+<p>5、技能断平射时，会适时的续平射</p>
+<p>6、优化了守护舞逻辑</p>
+<p>7、添加禁止毛钉刺目标，血兽，寒冰之球</p>
+<p>4.06.0版本的更新</p>
+<p>1、修复toc老一宁神</p>
+<p>2、修复暗王不打稳固的bug</p>
+<p>3、优化射击猎的循环</p>
+<p>4.05.0版本的更新</p>
+<p>1、宁神会打断稳固施法</p>
+<p>2、优化了乱射的打断时间</p>
+<p>3、冰龙的后跳加了可选延迟范围</p>
+<p>4、多线杀戮会正确按照设定参数打断稳固</p>
+<p>5、修复了假死仇恨计算bug</p>
+<p>6、修复绿龙拉僵尸</p>
+<p>7、lk僵尸狂暴开始施法提前停手宁神</p>
+<p>4.03.0版本的更新</p>
+<p>1、绿龙增加风筝僵尸的特化</p>
+<p>2、女王开局15秒自动假死，避免第一咬</p>
+<p>3、lk进价自动扰乱和假死打断</p>
+<p>4、 新增裁决,密语尖牙,死亡意志buff注册.</p>
+<p>4.02.0版本的更新</p>
+<p>1、教授软泥点名假死，软泥上钉刺</p>
+<p>2、修复了几个boss的事件识别，待测试</p>
+<p>3、乱射绑定加速手套</p>
+<p>4、加了毛黑箭的机制</p>
+<p>5、修复了几个boss的事件识别，待测试</p>
+<p>6、加了冰龙刺骨的停手</p>
+<p>7、增加了4个自定义快捷按钮</p>
+<p>8、 aoe2不管是否开启自动陷阱，都会优先扔爆炸陷阱</p>
+<p>4.01.0版本的更新</p>
+<p>自动假死，BOSS OT自动假死，高仇恨下会提前减少损失的假死，有可选项</p>
+<p>切换单体模式时，会提前打断乱射读条进入单体模式</p>
+<p>降低了高蓝切蝰蛇的下限至10%</p>
+<p>优化稳固和多重、爆炸陷阱、杀戮的权重</p>
+<p>自动退出盲区，单体模式中会检测目标距离，退出近战范围，有可选项</p>
+<p>优化多线杀戮的机制，减少伤害溢出</p>
+<p>宁神现在优先对焦点目标使用，其次对当前目标和鼠标指向目标也可生效</p>
+<p>优化了猎人印记机制，不再无脑对小怪上标记，也加入了手动插入标记的快捷键</p>
+<p>BOSS特化（测试中，均可以选择性打开）</p>
+<p>ICC老一，白骨风暴自动开威慑</p>
+<p>亡语者P1会优先使用蝰蛇钉刺</p>
+<p>鲜血女王上天aoe会自动开启威慑</p>
+<p>冰龙冰冷之握拉人后自动后跳</p>
+<p>3.03.0版本的更新</p>
+<p>更新内容</p>
+<p>修复少量用户窗口模式没反应的问题</p>
+<p>修复小概率卡技能的bug</p>
+<p>3.02.0版本的更新</p>
+<p>更新内容</p>
+<p>修复最新版本win11启动器报错的bug</p>
+<p>修复乌巅乌堡报错的bug</p>
+<p>3.01.0版本的更新</p>
+<p>更新内容</p>
+<p>适配幻化客户端, 修复闪退, 配置按钮无效等bug</p>
+<p>2.02.0版本的更新</p>
+<p>更新内容</p>
+<p>修复windows11闪退的问题</p>
+<p>修复游戏窗口模式无反应的问题</p>
+<p>自带反扫描, 无需改名字, 无需改特征, 无需火绒, 无需Guest用户. </p>
+<p>程序不要放在桌面(快捷方式可以放桌面)</p>
+<p>程序可能会被杀毒误报, 请点击信任</p>
+<p>如果被火绒杀掉的, 请在隔离区添加信任</p>
+<p>2.0.2版本的更新</p>
+<p>更新内容</p>
+<p>2.0.1的版本发布错了, 大部分更新在这个版本里面</p>
+<p>2.0.1版本的更新</p>
+<p>更新内容</p>
+<p>掌炉, 三树不再断条稳固. 三树断条箭雨</p>
+<p>修正快速转身设置里的ctrl-U会自动按回车键的问题</p>
+<p>修正尤格萨隆p2内场轻微抽搐的问题</p>
+<p>修正了自动手套打断箭雨的bug</p>
+<p>移动中用瞄准替代多重, 因为多重移动中打不出来</p>
+<p>新增插入手套</p>
+<p>维扎克斯将军取消了省蓝模式, 现在有黑水箭雨, 没黑水稳固</p>
+<p>议会p3用瞄准替代多重, 减少boss回血量</p>
+<p>2.0版本的更新</p>
+<p>更新内容</p>
+<p>极大的降低了走射的站定时间, 由0.3秒降低到0.01秒, 你甚至察觉不到你站定了.</p>
+<p>由于走射太过丝滑,  现在默认开启(之前由于站定时间太长, 影响体验, 默认关闭)</p>
+<p>走射只有主目标在射程范围内生效(之前是射程范围+5码生效)</p>
+<p>新增快捷面板, 方便大家在战斗时, 实时调整配置. boss战会载入该boss的特化. 色块旁边有按钮可以隐藏/显示面板</p>
+<p>假死, 坐骑上的时候, 不会自动切守护.</p>
+<p>新增插入技能焦点误导, 快捷键g,  自动焦点误导现在默认不勾选</p>
+<p>新增插入技能前跳, 快捷键h , 需要战斗中</p>
+<p>前跳需要配置快速转身, 请参考奥杜尔最佳实践.</p>
+<p>程序挂起后, 小键盘恢复到可用状态</p>
+<p>修正稳固等待爆炸射击不生效的bug</p>
+<p>稳固现在不但等待爆炸射击, 还等杀戮, 多重, 奇美拉, 爆炸陷阱</p>
+<p>修正了近身aoe循环被爆炸射击卡住的问题</p>
+<p>近身加入猫鼬撕咬</p>
+<p>近身加入毒蛇陷阱(有开关, 默认开)</p>
+<p>修正猛禽打断乱射的bug</p>
+<p>爆发监控添加破甲虚弱, 快速射击, 战术大师, 狩猎兽群</p>
+<p>1.2.2版本的更新</p>
+<p>更新内容</p>
+<p>修正了团本boss战卡住不放技能的问题</p>
+<p>1.2.1版本的更新</p>
+<p>更新内容</p>
+<p>蝰蛇舞支持</p>
+<p>ahk回车挂起可自定义, 默认挂起, 可在ahk.txt里配置</p>
+<p>加了一些配置项, 修正了一些bug</p>
+<p>1.2版本的更新</p>
+<p>更新内容</p>
+<p>修正了因为TMW,Plater使用大灾变的距离判断库, 导致30码距离发呆的问题</p>
+<p>修正了极少数用户, 因为色块和最上方有空隙, 导致发呆的问题.</p>
+<p>修正了极少数情况, 开火状态, 切出游戏会报错的问题</p>
+<p>色块旁边加了一个配置按钮, 可以快速弹出配置界面</p>
+<p>新增一个自动爆发配置界面</p>
+<p>新增走射, 默认关闭, 需要去配置页面打开</p>
+<p>新增插入黑箭, 冰霜陷阱</p>
+<p>近战距离自动猛禽</p>
+<p>boss快死时, 也保持毒蛇钉刺</p>
+<p>爆炸射击CD快好时, 稳固射击等待一小会(可配置)</p>
+    </div>
+ </div>
+    `;
+
+            // 隐藏所有内容区域
+            hideAllSections();
+
+            // 设置新内容
+            var contentDiv = document.getElementById('log-content');
+            contentDiv.innerHTML = tempContent;
+            contentDiv.classList.add('active');
+
+            // 添加恢复函数到window对象
+            window.restoreLogContent = function () {
+                document.getElementById('log-content').innerHTML = originalLogContent;
+            };
+        }
+
+        function showW25Log() {
+            // 保存原始日志内容
+            var originalLogContent = document.getElementById('log-content').innerHTML;
+
+            // 创建临时显示内容
+            var tempContent = `
+        <div style="position: relative; min-height: 300px;">
+            <button onclick="window.showSection('log'); restoreLogContent();"
+                    style="position: absolute; top: 10px; right: 10px; padding: 8px 15px; 
+                           background-color: #2c2c2c; color: white; border: none; 
+                           border-radius: 4px; cursor: pointer;">返回</button>
+            <div style="color:white; padding:50px;">
+                <h2>【W2】小德更新日志</h2>
+<p>3.18.0 版本的更新</p>
+<p>1：优化第二个狂暴在BOSS死亡时间允许的情况下，会对齐饰品以及第二个加速药水。</p>
+<p>2：优化输出循环提升斜掠覆盖率。</p>
+<p>3：新增ICC 1号/2号/LK瓦格里，自动横扫，BOSS特化配置项/快捷页面可自由勾选。</p>
+<p>4：新增指向激活。</p>
+<p>5：修正熊T，在ICC自动树皮、小概率断割伤的BUG。</p>
+<p>3.17.0 版本的更新</p>
+<p>修复3.16版本报错的严重问题</p>
+<p>3.16.0 版本的更新</p>
+<p>修复3.15版本报错的严重问题</p>
+<p>3.15.0 版本的更新</p>
+<p>猫:</p>
+<p>1.修正小萨提前1%死亡，导致收尾技能未正确释放的BUG。</p>
+<p>2.再次优化议会、女王、冰龙转阶段前/死亡前输出循环。</p>
+<p>3.新增ICC所有BOSS，自保技能自动使用。</p>
+<p>4.修正未勾选自动裂伤并同时开启自动正面导致的卡死BUG。</p>
+<p>5.补裂伤提前量下调到0。</p>
+<p>6.优化猫形态下自动战复(将损失降至最低)。</p>
+<p>熊：优化循环，修正4T10自动使用激怒BUG。</p>
+<p>3.14.0 版本的更新</p>
+<p>鸟德:</p>
+<p>1.新增手动插入技能自然之力,星辰坠落</p>
+<p>2.新增手套/药水对齐月蚀施放选项,手套/药水将会自动对齐月蚀施放,请禁用所有通用配置中的自动爆发</p>
+<p>3.新增是否施放精灵之火选项</p>
+<p>4.优化愤怒/星火术/自然之力/星辰坠落/施放策略</p>
+<p>5.优化细分虫群和月火术T9/T10及是否搭配星火雕文的各种施放策略</p>
+<p>6.星辰坠落会和手雷同时丢出请注意鼠标摆放位置</p>
+<p>3.13.0 版本的更新</p>
+<p>修复冰龙卡顿的问题</p>
+<p>3.12.0 版本的更新</p>
+<p>1修复icc4号卡住不攻击BUG</p>
+<p>2修复冰龙卡住BUG</p>
+<p>3.11.0 版本的更新</p>
+<p>优化议会/冰龙输出循环</p>
+<p>新增各BOSS战，自动使用保命技能</p>
+<p>修正咆哮割裂变量</p>
+<p>3.10.0 版本的更新</p>
+<p>4号自动取消保护之手</p>
+<p>Lk进剑自动打断</p>
+<p>熊德只有boss战才开狂暴</p>
+<p>3.09.0 版本的更新</p>
+<p>修正冰龙刺骨BUFF超标不停肉搏BUG</p>
+<p>添加ICC2号中麻痹诅咒停手</p>
+<p>添加自动裂伤开关</p>
+<p>注意现在如果需要打木桩测试，请在配置页面勾选木桩测试，否则会不自动狂暴</p>
+<p>3.08.0 版本的更新</p>
+<p>修正猫boss快死了卡住的bug</p>
+<p>3.07.0 版本的更新</p>
+<p>熊:修复AOE不施放重殴bug</p>
+<p>猫: 优化循环技能参数,插入参数调整,修复正面芒果控能,自动手套将对其猛虎</p>
+<p>修正断裂伤BUG</p>
+<p>优化循环细节</p>
+<p>鸟:修复2T9月火术问题</p>
+<p>3.06.0 版本的更新</p>
+<p>大幅优化猫德循环</p>
+<p>提高平稳期能量池</p>
+<p>优化进狂暴的高位能量</p>
+<p>优化撕碎触发条件,调整泄能和续能条件</p>
+<p>割裂由于优先级原因有较小的可能存在1-3秒的断档不要担心,不亏</p>
+<p>3.05.0 版本的更新</p>
+<p>优化猫德循环</p>
+<p>新插入技能：指向战复/吹风(团队框架即可) ahk.txt 自己更改快捷键</p>
+<p>3.04.0版本的更新</p>
+<p>老二新增羊, 偷buff, 解诅咒开关</p>
+<p>老二修复不给自己解诅咒的bug</p>
+<p>烂肠新增放屁冰箱开关</p>
+<p>萨鲁法尔新增印记冰箱开关</p>
+<p>教授新增隐身开关</p>
+<p>议会新增鼠标冰枪开关,自动切目标开关</p>
+<p>女王新增跑蜂拥, 连线火箭靴开关</p>
+<p>冰龙新增狂咒冰箱, 狂咒停手, 动荡停手层数开关</p>
+<p>巫妖王新增跑污染开关</p>
+<p>3.02.0版本的更新</p>
+<p>教授普通模式第2次转阶段自动隐身</p>
+<p>多线排除目标添加"萨鲁法尔大王","穆拉丁·铜须","达尔纳文"</p>
+<p>3.01.0版本的更新</p>
+<p>修复toc冰吼, 老二发呆的bug</p>
+<p>3.00.0版本的更新</p>
+<p>修复老二卡死的bug</p>
+<p>2.04.0版本的更新</p>
+<p>更新内容</p>
+<p>修复了一个小括号判断错误的bug, 可以减少浪费法术连击的概率</p>
+<p>这个bug所有的fojji小括号wa都有, 我后续出一个修正版wa</p>
+<p>修复少量用户窗口模式没反应的问题</p>
+<p>修复小概率卡技能的bug</p>
+<p>2.03.0版本的更新</p>
+<p>更新内容</p>
+<p>当有多个怪的时候, 提高炎爆的优先级.</p>
+<p>简单来说, 会打更多炎爆, 减少大括号浪费.</p>
+<p>具体来说, 之前版本的逻辑是, 当只有单大括号, 活动炸弹的优先级高于炎爆, 这在只有1个怪的时候没问题. 但是当有多个怪, 有大括号, 并且炸弹要炸了的时候, 如果炸弹优先级还是高于炎爆的话, 由于炸弹可能连续暴击, 导致浪费一个大括号. 所以现在改为, 当有多个怪的时候, 并且炸弹要炸了, 炎爆优先级会提高</p>
+<p>有燃烧的时候, 不放火冲</p>
+<p>修复偷到燃烧后, 仍然会自动释放燃烧的bug</p>
+<p>2.02.0版本的更新</p>
+<p>更新内容</p>
+<p>修复女王之吻发呆, 聊天框乱说话的bug</p>
+<p>冰喉易伤期间不打活动炸弹只打火球炎爆</p>
+<p>新增插入隐身, 快捷键x, 在已经隐身的时候, 是取消隐身</p>
+<p>修复乌巅乌堡中冰后, 循环助手退出的bug</p>
+<p>2.01.0版本的更新</p>
+<p>更新内容</p>
+<p>适配幻化客户端, 修复闪退, 配置按钮无效等bug</p>
+<p>老二女王之吻骑士开光掌,不用特化(没有光掌还是使用特化技能)</p>
+<p>1.09.1版本的更新</p>
+<p>更新内容</p>
+<p>修复了toc老二卡住的bug</p>
+<p>1.09.0版本的更新</p>
+<p>更新内容</p>
+<p>老二wcl开关, 只打第一个门, 火山, 女王, 前2个地狱火. 毒瘤开关, 非冲分不要勾选</p>
+<p>小强60w中虫开关</p>
+<p>老二女王之吻特化寒冰箭</p>
+<p>插入冰箱, 在已经冰箱的时候, 是取消冰箱</p>
+<p>新开关, 多线炎爆</p>
+<p>老二如果身上有虚空之能buff, 但是持续时间小于12秒, 则不上活动炸弹(因为炸弹的dot是快照机制, 爆炸不是快照机制)</p>
+<p>老二自动偷盾开关, 默认开. 帮别的法师造神的时候可以关掉</p>
+<p>1.08.0版本的更新</p>
+<p>更新内容</p>
+<p>老二新配置项, 不偷buff时间, boss死亡时间小于多少秒, 就不偷了, 默认10</p>
+<p>新增插入冰箱, 快捷键u</p>
+<p>修复启动器win11 24h2最新版本报错的问题</p>
+<p>1.07.2版本的更新</p>
+<p>更新内容</p>
+<p>只有p3中了刺骨才会冰箱, p2跑冰中了不会冰箱</p>
+<p>1.07.0版本的更新</p>
+<p>更新内容</p>
+<p>老一被冰吼冻住后, 使用人类种族天赋或者闪现</p>
+<p>老1中麻痹毒素不冰箱, 冰箱留给冰吼昏迷</p>
+<p>冰吼冰箱躲昏迷</p>
+<p>双子双线炸弹, 2个炸弹间隔3秒以上, 避免同时炸</p>
+<p>双子新开关"同色破盾"</p>
+<p>1.06.1版本的更新</p>
+<p>更新内容</p>
+<p>多线炎爆(这个不是toc特化. uld,naxx,木桩都可以用)</p>
+<p>老二自动偷buff</p>
+<p>刺骨之寒,麻痹毒素,军团烈焰自动冰箱, 然后自动解冰箱</p>
+<p>1.05.0版本的更新</p>
+<p>更新内容</p>
+<p>修复windows11闪退的问题</p>
+<p>修复游戏窗口模式无反应的问题</p>
+<p>自带反扫描, 无需改名字, 无需改特征, 无需火绒, 无需Guest用户. </p>
+<p>程序不要放在桌面(快捷方式可以放桌面)</p>
+<p>程序可能会被杀毒误报, 请点击信任</p>
+<p>如果被火绒杀掉的, 请在隔离区添加信任</p>
+<p>1.03版本的更新</p>
+<p>更新内容</p>
+<p>更新了活动炸弹的循环逻辑.</p>
+<p>1.小怪死太快, 多线的时候不再给小怪上活动炸弹</p>
+<p>2.配置里面新增了活动炸弹排除目标, 可以精确控制哪些怪不上活动炸弹</p>
+<p>奥杜尔做了特化.</p>
+<p>1.多线的自动设置</p>
+<p>2.自动断条防沉默</p>
+<p>3.尤格萨隆自动转身</p>
+<p>4.将军省蓝循环</p>
+<p>1.02版本的更新</p>
+<p>更新内容</p>
+<p>修正了因为TMW,Plater使用大灾变的距离判断库, 导致30码距离发呆的问题</p>
+<p>修正了极少数用户, 因为色块和最上方有空隙, 导致发呆的问题.</p>
+<p>修正了极少数情况, 开火状态, 切出游戏会报错的问题</p>
+<p>色块旁边加了一个配置按钮, 可以快速弹出配置界面</p>
+<p>新增一个自动爆发配置界面</p>
+    </div>
+ </div>
+    `;
+
+            // 隐藏所有内容区域
+            hideAllSections();
+
+            // 设置新内容
+            var contentDiv = document.getElementById('log-content');
+            contentDiv.innerHTML = tempContent;
+            contentDiv.classList.add('active');
+
+            // 添加恢复函数到window对象
+            window.restoreLogContent = function () {
+                document.getElementById('log-content').innerHTML = originalLogContent;
+            };
+        }
+
+        function showW26Log() {
+            // 保存原始日志内容
+            var originalLogContent = document.getElementById('log-content').innerHTML;
+
+            // 创建临时显示内容
+            var tempContent = `
+        <div style="position: relative; min-height: 300px;">
+            <button onclick="window.showSection('log'); restoreLogContent();"
+                    style="position: absolute; top: 10px; right: 10px; padding: 8px 15px; 
+                           background-color: #2c2c2c; color: white; border: none; 
+                           border-radius: 4px; cursor: pointer;">返回</button>
+            <div style="color:white; padding:50px;">
+                <h2>【W2】骑士更新日志</h2>
+<p>2.20.0 版本的更新</p>
+<p>1、修复LK场景自动火箭靴跑黑水</p>
+<p>2、LK瓦格里抓人自动制裁职业判定新增猎人，目前只排除术士</p>
+<p>3、新增防骑LKP1场景，如果LR人没打凝神，自动制裁暴怒的大僵尸</p>
+<p>4、新增防骑腐面风筝大软泥怪，当目标是大软泥怪会自动切公正圣印优先远距离卡CD审判，应对H模式防骑拉怪</p>
+<p>5、修正跳跃神圣风暴修，现在身边怪物数量大于3且没有在移动中才会跳起来施放技能</p>
+<p>6、新增防骑自动制裁之锤版面开关，自动对身边范围内读条的法系怪制裁</p>
+<p>2.19 版本的更新</p>
+<p>1、修正斩杀期存在的bug</p>
+<p>2、新增嗜血期赌脸，快捷面板勾选"嗜血循环"嗜血期循环模式将会拉高神圣风暴的优先级</p>
+<p>3、修正老1读骨刺预留神圣风暴的bug</p>
+<p>4、新增起手自动爆发和斩杀期自动爆发，起手圣印叠满5层，斩杀期Boss血量低于20%</p>
+<p>5、新增跳跃式神圣风暴，当释放神圣风暴的时候，系统自动让人物跳起来释放</p>
+<p>6、优化三谛圣印起手式</p>
+<p>7、修复蓝量不够开启圣印导致卡顿掉帧的bug</p>
+<p>8、优化低蓝应急模式，现在永远不会因为蓝量打空导致罚站，可以自己去打木桩测试</p>
+<p>9、新增防骑TOC 小强战斗中 自动打断中虫的暗影突袭技能</p>
+<p>10、新增防骑天赋下，如果有队友仇恨百分比超过90以上，鼠标指向队友会自动释放拯救之手，职责为坦克的队友会自动过滤掉</p>
+<p>11、上坐骑后自动切换十字军光环</p>
+<p>2.18 版本的更新</p>
+<p>1、修正了2T10后团本中因急速导致技能循环Bug，进一步降低蓝耗问题，秒伤略有回落，战斗时间长的Boss优势会更突出</p>
+<p>2、新增扔雪球回蓝功能，勾选框在快捷面板，勾选后只有在BOSS战斗场景中且蓝量低于30%以下才会开始扔，回蓝效果比较明显</p>
+<p>3、新增智能控蓝功能，勾选框在快捷面板，勾选后设定智能控蓝百分比，通过Boss血量及自身蓝量的换算关系按照设定比例判断是否需要丢奉献和神圣愤怒，自己酌情设定。只设定比例不勾选，设定判断为无效操作</p>
+<p>4、新增斩杀期循环，自动避让所有节能</p>
+<p>5、新增蓝量应急，当蓝量低于900，输出循环进入应急状态，所有技能避让审判</p>
+<p>2.17 版本的更新</p>
+<p>1、修正瓦格里抓人阶段，玩家设定的编号瓦格里被别的骑士制裁导致程序卡住的bug</p>
+<p>2、萨鲁法尔战斗场景新增进入战斗后自动屏蔽多线，避免对血兽丢斩杀锤，战斗结束后自动恢复多线</p>
+<p>3、新增圣印舞，快捷栏勾选后，aoe模式下当前目标腐蚀圣印dot＜5秒会自动续杯，多用于瓦格里阶段aoe场景，非常耗蓝，不是冲榜打分的慎用，惩戒骑勾选，防骑无效</p>
+<p>4、优化议会战斗场景，当前目标会跟着Boss转换自动切换，攻击目标屏蔽了黑暗之核</p>
+<p>5、新增自动取消保护之手</p>
+<p>6、修正“黑暗符文”职业判定，仅限惩戒骑</p>
+<p>2.16 版本的更新</p>
+<p>1、新增起手是否需要开启神圣恳求的控制开关</p>
+<p>2、优化了清算之手的释放速度</p>
+<p>3、新增鲜血女王战斗起手5秒自动给自己丢拯救祝福避免第一咬，有特化开关勾选是否启用（仅限惩戒骑）</p>
+<p>4、新增“黑暗符文”判定，当你背包里有黑暗符文蓝量小于20%自动使用（仅限Boss战）</p>
+<p>5、新增“玛洛加尔领主”在释放“天灾领主之刺”技能读条期间，如果神圣风暴处于冷却状态则会预留该技能，等骨刺出来后第一时间释放。（该功能有利有弊，特化区有开关自行判断勾选）</p>
+<p>2.15 版本的更新</p>
+<p>1、新增插入技能“神圣愤怒”（适用于有些LK的团队战术，瓦格里阶段请提前关闭快捷栏的神圣愤怒按钮）</p>
+<p>2、优化自动制裁瓦格里（采用多线模式自动制裁设定好的对应编号）</p>
+<p>3、萨鲁法尔战斗场景给中血之沸腾队友保护的功能新增了职业排除(目前排除职业有DK ZS DZ QS ,鼠标移动到这些职业身上不在会自动丢保护祝福，H模式后取消该功能，自己按照团长的分配手动插入)</p>
+<p>4、新增老2传销女中麻痹诅咒后的停手功能，队友驱散诅咒后继续输出</p>
+<p>5、优化防骑群拉技能优先级</p>
+<p>6、新增保护之手队友血限设定（保护之手现在优化为当队友血量小于设定值，只需要鼠标指向队友框架即可自动释放，只会对团队职责为治疗 输出的进行释放，职责为坦克的已经排除。）</p>
+<p>7、自动爆发选项新增：裁决，意志，尖牙</p>
+<p>8、新增自动指向队友圣疗术，当队友血量低于20%，鼠标指向框架自动释放，Toc小强战斗场景不会自动释放</p>
+<p>9、新增自动驱散LK战斗场景的灵魂尖啸debuff（鼠标指向队友框架即可）</p>
+<p>10、新增LK战斗场景进剑后，自动打断灵魂戒卫读条</p>
+<p>2.14 版本的更新</p>
+<p>1、优化2T10循环，当BOSS快死亡时神圣恳求排除循环列表</p>
+<p>2、优化Aoe模式蓝耗续航</p>
+<p>3、新增K场景特化牺牲之手开关（K释放灵魂收割技能，鼠标指向DKT自动释放牺牲之手，有控制开关自己按需选择）</p>
+<p>4、新增K场景瓦格里战斗中制裁之锤编号设定（按照团长分配的标记自行设定，当你鼠标移动到设置的标记上则会自动制裁）</p>
+<p>5、新增萨鲁法尔场景保护之手的勾选开关</p>
+<p>6、新增教授场景中给高达自动上力量祝福的勾选开关</p>
+<p>2.12 版本的更新</p>
+<p>1、教授战斗中鼠标指向高达自动上力量祝福</p>
+<p>2、萨鲁法尔战斗场景中，当队友中了"沸腾之血"debuff，鼠标指向团队框架自动释放保护之手</p>
+<p>3、鲜血女王战斗场景中恐惧自动使用生存意志解除</p>
+<p>4、修正萨鲁法尔战斗场景中血兽的制裁方式，从目标释放修正为鼠标指向释放</p>
+<p>5、修正自动圣疗术，加入排除名单，当目标战斗场景是小宝，大臭的时候将不会自动释放圣疗</p>
+<p>2.11 版本的更新</p>
+<p>1、教授战斗中鼠标指向高达自动上力量祝福</p>
+<p>2、萨鲁法尔战斗场景中，当队友中了"沸腾之血"debuff，鼠标指向团队框架自动释放保护之手</p>
+<p>3、鲜血女王战斗场景中恐惧自动使用生存意志解除</p>
+<p>4、修正萨鲁法尔战斗场景中血兽的制裁方式，从目标释放修正为鼠标指向释放</p>
+<p>2.09.0 版本的更新</p>
+<p>5、新增惩戒骑K场景自动制裁瓦格里，萨鲁法尔场景自动制裁血兽</p>
+<p>6、修正议会多线乱扔锤子的BUG</p>
+<p>7、新增惩戒骑智能Aoe，快捷面板有勾选框，大家按需勾选（仅限惩戒骑，防骑无效，Boss战自动取消该功能）</p>
+<p>2.08.0 版本的更新</p>
+<p>1、修复团队有刺杀贼时, 惩戒骑卡住的bug</p>
+<p>2、开始逐步完善各BOSS特化，现在进入BOSS战斗后，对应的BOSS特化选项会出现在快捷窗口，BOSS战结束自动清除</p>
+<p>3、更新了自动圣疗功能，自己在配置面板设定血线百分比，防骑惩戒骑通用。不想自动圣疗可以把百分百设置为0</p>
+<p>4、更新寒冰刺骨达到指定层数停止攻击（后期更新停手后只放神圣风暴+奉献）</p>
+<p>5、更新巫妖王的瓦格里抓人阶段，大家自行选择是否需要释放神圣愤怒，勾选则不释放（瓦格里抓人期间一般都是安排骑士分工轮流制裁，这个期间释放神圣愤怒容易形成控制时常递减，大家酌情勾选）</p>
+<p>2.06.0 版本的更新</p>
+<p>1、修正AOE模式下挂起后使用腐蚀圣印的BUG</p>
+<p>2、优化了防骑的AOE模式</p>
+<p>3、优化了惩戒骑神圣风暴、奉献的判定距离（ICC副本场景中运动战偏多，有时候会出现因为距离边界的判断导致神圣风暴和风险并没有产生伤害，目前该问题已解决。）</p>
+<p>2.05.1 版本的更新</p>
+<p>1、新增十字军打击与圣神风暴的技能优先级算法</p>
+<p>2、将防骑大牺牲修正为自动取消增伤BUFF</p>
+<p>2.05.0 版本的更新</p>
+<p>上个版本的更新由于增加了较多插入技能，导致大家前期会有点不适应按键，建议对于自己觉得不常用或者不想用的技能，可以在文件目录ahk.txt中直接设置为空，如下所示。     另：骑士在游戏里的定位是一个功能型职业，在关键时候帮助队友也可以收获到快乐。</p>
+<p>1.防骑更新内容如下：</p>
+<p>优化了防骑单体和群拉的技能优先级</p>
+<p>新增自动释放神圣恳求</p>
+<p>将防骑大牺牲修正为自动取消增伤BUFF</p>
+<p>2.惩戒骑更新内容如下：</p>
+<p>优化了ICC的技能优先级</p>
+<p>新增2T10的判断，2T10模式下神圣恳求的优先级，在人物角色靠近BOSS的路途中会自动开启神圣恳求</p>
+<p>新增对“三谛圣契”的判断，当三谛圣契的“苦力”buff不存在或没有叠满5层的时候，软件会将十字军打击拉升的最高优先级以保证最快速叠满buff。</p>
+<p>快捷版面新增控蓝模式（P4由于2T10的特效加入，惩戒骑的cast数量变多，续航容易跟不上，我对技能优先级最末位的三个技能奉献，驱邪，神圣愤怒做了蓝耗设定，大家自己根据需求来选择比例，设置为0则是一直释放，建议设置到15%以下就不打这3个技能，当BOSS死亡时间小于10秒，软件会自动忽视掉这个控蓝策略。）</p>
+<p>新增对橙斧的优化，自动取消特效（森罗万象）（单体提升大约100秒伤左右。小怪、血兽以及瓦格里阶段不会取消）</p>
+<p>新增十字军与圣神风暴的技能优先级算法（新增十字军与圣神风暴的技能优先级算法，当十字军打击和神圣风暴同时好，下一刀平砍时间大于1.5秒则十字军，小于1.5秒则神圣风暴，利用平砍增加2T10触发几率）</p>
+<p>2.04.0 版本的更新</p>
+<p>换了个新的作者做的, 快捷键变化比较大, 大家注意一下</p>
+<p>新增防骑天赋更新内容如下：</p>
+<p>新增防骑696拉怪循环</p>
+<p>防骑天赋下，软件会自动检测你是否打开正义之怒，如果没有会帮你开启</p>
+<p>新增插入飞盾（鼠标指向，没有指向则向当前目标释放）注意：插入飞盾的前提条件是必须要有当前目标，指向飞盾的时候需要保持游戏角色与指向目标的距离小于30码，且必须面对指向目标，否则飞盾将会攻击当前目标</p>
+<p>新增插入自由之手（鼠标指向队友或框架，没有指向则向自己释放）</p>
+<p>新增插入神圣牺牲（团体减伤）防骑模式不会取消承伤，后续NQ模式会自动秒取</p>
+<p>新增插入保护之手（鼠标指向队友或框架，没有指向则向自己释放）</p>
+<p>新增插入拯救之手（鼠标指向队友或框架，没有指向则向自己释放）</p>
+<p>新增插入制裁之锤（鼠标指向或框架，没有指向则向当前目标释放）</p>
+<p>新增插入牺牲之手（鼠标指向队友）</p>
+<p>新增插入圣疗术（鼠标指向队友或框架，没有指向则向自己释放）</p>
+<p>新增插入光环掌握</p>
+<p>新增无敌取消功能，按一下插入无敌，按第二下取消</p>
+<p>自由之手 保护之手 拯救之手 牺牲之手 注意事项：</p>
+<p>1、如果想对自己释放点击插入即可，如果想对队友释放，请等技能释放出来以后再将鼠标挪开目标框架，因为技能与技能之间有1.5秒GCD，如果GCD没转好鼠标挪开当前目标 脚本则会判定你是对自己插入了技能。</p>
+<p>2、向队友释放上述指向性插入技能，请保证队友再你的技能释放范围内，否则脚本还是会判定你是对自己插入了该技能。没办法，暴雪的宏命令限制了。</p>
+<p>如果大家觉得键位不够用，非指向性插入技能，可以通过做宏的形式进行点击式插入，宏命令如下：</p>
+<p>神圣牺牲：</p>
+<p>#showtootip 神圣牺牲</p>
+<p>/PaadinAssist insert ssxs</p>
+<p>光环掌握：</p>
+<p>#showtootip 光环掌握</p>
+<p>/PaadinAssist insert ghzw</p>
+<p>鼠标点击图标宏即可插入团减与光掌</p>
+<p>上述更新的技能插入，防骑惩戒骑均可使用，欢迎大家多提意见，后期会陆续更新奶骑天赋。</p>
+<p>2.03.0 版本的更新</p>
+<p>修复愤怒之锤卡住的bug</p>
+<p>神圣愤怒, 奉献加入开关</p>
+<p>神圣愤怒, 奉献, 神圣风暴加入距离判断</p>
+<p>修复少量用户窗口模式没反应的问题</p>
+<p>2.02.0 版本的更新</p>
+<p>修复最新版本win11启动器报错的bug</p>
+<p>修复乌巅乌堡报错的bug</p>
+<p>2.01.0 版本的更新</p>
+<p>适配幻化客户端, 修复闪退, 配置按钮无效等bug</p>
+<p>1.02.0 版本的更新</p>
+<p>正在回蓝/回血审判切换的开关</p>
+<p>愤怒之锤现在是多线模式的了(如果多线目标不在正面, 会等8秒再尝试)</p>
+<p>修正2t9卡住的bug</p>
+<p>修正防骑天赋聊天窗一直刷没检测到天赋的bug</p>
+    </div>
+ </div>
+    `;
+
+            // 隐藏所有内容区域
+            hideAllSections();
+
+            // 设置新内容
+            var contentDiv = document.getElementById('log-content');
+            contentDiv.innerHTML = tempContent;
+            contentDiv.classList.add('active');
+
+            // 添加恢复函数到window对象
+            window.restoreLogContent = function () {
+                document.getElementById('log-content').innerHTML = originalLogContent;
+            };
+        }
+
+        function showW27Log() {
+            // 保存原始日志内容
+            var originalLogContent = document.getElementById('log-content').innerHTML;
+
+            // 创建临时显示内容
+            var tempContent = `
+        <div style="position: relative; min-height: 300px;">
+            <button onclick="window.showSection('log'); restoreLogContent();"
+                    style="position: absolute; top: 10px; right: 10px; padding: 8px 15px; 
+                           background-color: #2c2c2c; color: white; border: none; 
+                           border-radius: 4px; cursor: pointer;">返回</button>
+            <div style="color:white; padding:50px;">
+                <h2>【W2】战士更新日志</h2>
+<p>1.08.0版本的更新</p>
+<p>新增防战模式，5人本测试完毕，用户使用时有bug或者意见及时反馈。（第一次使用请打开ahk.txt设置按键）防战仅支持使用智能模式为开火按键。</p>
+<p>打断增加百分比模式，可自行选择读条到多少百分比打断，女王上天放AOE的时候自动切换防御姿态且血量低于80%会尝试开狂怒回复回血，循环撕裂增加开关，可自行决定要不要程序在循环中加入撕裂，同时用户可以设置插入按键自行插入撕裂，转阶段的撕裂适当提前避免偶尔打不上。</p>
+<p>1.07.0版本的更新</p>
+<p>增加独立的单体和AOE模式,请在AHK.txt里修改快捷键.（单体模式指示器为粉色,AOE模式指示器为黄色,智能模式指示器为红色,如果你只需要智能模式即可和图片上一样把单体和AOE的快捷键留空,如果不需要智能模式则智能模式留空）</p>
+<p>单体和AOE模式仅保留冰龙刺骨停手特化,智能模式为全特化.</p>
+<p>增加撕裂进循环,会在最优时间打撕裂,插入碎裂增加限制，现在碎裂手动插入会等主手砍出去的瞬间丢，丢不出去就是没到最优时间可再次插入.</p>
+<p>1.06.0版本的更新</p>
+<p>1：插入撕裂，Boss转阶段自动挂撕裂（老一、教授、女王、冰龙、巫妖王）。</p>
+<p>2：非狂暴姿态自动切回狂暴姿态。</p>
+<p>3：自动秒断（当前目标或焦点），可用开关控制是否秒断。</p>
+<p>4：当天赋点了强化狂暴之怒时会用狂暴之怒回怒（女王屏蔽）。</p>
+<p>5：萨鲁法尔战斗中自动取消保护之手，2号传销女中了麻痹诅咒停手。</p>
+<p>1.05.0版本的更新</p>
+<p>新增：插入吼血。</p>
+<p>修复：有时候大小爆发插入不了死愿的BUG。</p>
+<p>1.04.0版本的更新</p>
+<p>新增：特化增加腐面、巫妖王p1阶段不打顺劈、女王上天自动解恐惧；自动吼血并可用开关控制；插入死亡之愿。</p>
+<p>修改：更改了快捷面板说明文字；冰龙刺骨停手特化面板将在boss战斗时打开也可进入配置里提前设置；英勇打击的最低怒气限制提升覆盖率。</p>
+<p>修复：不打斩杀的bug。</p>
+<p>删除：英勇投掷（垃圾技能）</p>
+<p>1.03.0版本的更新</p>
+<p>修正ICC4号、议会顺劈</p>
+<p>添加冰龙自动停手层数快捷键</p>
+<p>多线开关可以控制顺劈</p>
+<p>1.02.0版本的更新</p>
+<p>增加鲁莽和死愿的判定</p>
+<p>1.01.0版本的更新</p>
+<p>优化输出循环逻辑</p>
+<p>自动判定英勇/顺劈</p>
+<p>自动判定单体/AOE环境下技能优先级</p>
+<p>添加4T10猛击判定优先级</p>
+<p>优化武器同速问题</p>
+<p>添加插入拦截功能</p>
+<p>快捷面板添加更多功能，破甲/快破甲/慢破甲（破甲为总开关/勾选破甲后如再勾选快速破甲为先5破再输出，勾选慢破甲为优先主输出技能插空破甲，如同时勾选快慢破甲优先选择快破甲）</p>
+<p>1.00.0版本的更新</p>
+<p>支持狂暴战</p>
+    </div>
+ </div>
+    `;
+
+            // 隐藏所有内容区域
+            hideAllSections();
+
+            // 设置新内容
+            var contentDiv = document.getElementById('log-content');
+            contentDiv.innerHTML = tempContent;
+            contentDiv.classList.add('active');
+
+            // 添加恢复函数到window对象
+            window.restoreLogContent = function () {
+                document.getElementById('log-content').innerHTML = originalLogContent;
+            };
+        }
+
+        function showW28Log() {
+            // 保存原始日志内容
+            var originalLogContent = document.getElementById('log-content').innerHTML;
+
+            // 创建临时显示内容
+            var tempContent = `
+        <div style="position: relative; min-height: 300px;">
+            <button onclick="window.showSection('log'); restoreLogContent();"
+                    style="position: absolute; top: 10px; right: 10px; padding: 8px 15px; 
+                           background-color: #2c2c2c; color: white; border: none; 
+                           border-radius: 4px; cursor: pointer;">返回</button>
+            <div style="color:white; padding:50px;">
+                <h2>【W2】萨满更新日志</h2>
+<p>1.10.0版本的更新</p>
+<p>修复元素掌握卡住的bug</p>
+<p>1.09.0版本的更新</p>
+<p>修复1.08版本报错的问题</p>
+<p>1.08.0版本的更新</p>
+<p>修复1.07版本报错的问题</p>
+<p>1.07.0版本的更新</p>
+<p>更新图腾跟随策略区分增强/元素;</p>
+<p>更新火元素图腾,灼热图腾策略,区分元素/增强;</p>
+<p>新增手动插入图腾技能灼热/熔岩/战栗;</p>
+<p>修复无限插图腾问题;</p>
+<p>整合元素/增强快捷面板;</p>
+<p>单体闪电链同时对元素/增强(增强萨不控蓝)生效;</p>
+<p>自动火焰星星联和熔岩图腾联动,请根据图腾位置实时调节开关;</p>
+<p>新增武器自动武器附魔主手:火舌9/火舌10/风怒,副手:火舌10;</p>
+<p>元素萨:</p>
+<p>优化闪电链施放策略;</p>
+<p>增强萨:</p>
+<p>4T10闪电链/闪电箭策略更新,AOE/单体拥有策略不同;</p>
+<p>优化闪电之盾,风暴打击,熔岩图腾施放策略;</p>
+<p>调整单体循环技能优先级;</p>
+<p>优化萨满之怒自动释放策略;</p>
+<p>新增手动插入技能萨满之怒;</p>
+<p>新增手套/药水对齐萨满之怒;</p>
+<p>新增风火增强萨超级火自动换装功能,提前吃冰霜巨龙才会生效,不提供自动招火;</p>
+<p>自动识别静浪猴戏替换烈焰震击为大地震击</p>
+<p>1.06.0版本的更新</p>
+<p>增强萨循环优化</p>
+<p>1.05.0版本的更新</p>
+<p>修复烈焰震击bug,</p>
+<p>增加手动插入嗜血/英勇/元素掌握/火元素图腾/幽魂之狼/雷霆风暴</p>
+<p>1.04.0版本的更新</p>
+<p>修复打boss发呆的问题</p>
+<p>1.03.0版本的更新</p>
+<p>修复元素掌握和水盾</p>
+<p>1.02.0版本的更新</p>
+<p>添加一些技能自动开关:</p>
+<p>图腾跟随,图腾组选择</p>
+<p>嗜血/英勇</p>
+<p>元素萨的火焰新星</p>
+<p>水之护盾/闪电之盾</p>
+<p>1.01.1版本的更新</p>
+<p>更新火人/元素掌控/野性狼魂开关;熔岩爆裂/雷霆风暴/闪电链/闪电箭的条件细节</p>
+<p>1.00.0版本的更新</p>
+<p>支持电萨,增强萨</p>
+<p>电萨:</p>
+<p>	保持烈焰震击来确保熔岩必定暴击和节能施法;</p>
+<p>	单体中根据蓝量富裕情况插入闪电链;</p>
+<p>增强萨:</p>
+<p>3层以上漩涡武器闪电链箭/闪电箭会在平砍间隙找机会插入,避开白字延迟;</p>
+<p>	凑齐T10四件套后5层施放;</p>
+    </div>
+ </div>
+    `;
+
+            // 隐藏所有内容区域
+            hideAllSections();
+
+            // 设置新内容
+            var contentDiv = document.getElementById('log-content');
+            contentDiv.innerHTML = tempContent;
+            contentDiv.classList.add('active');
+
+            // 添加恢复函数到window对象
+            window.restoreLogContent = function () {
+                document.getElementById('log-content').innerHTML = originalLogContent;
+            };
+        }
+
+        function showW29Log() {
+            // 保存原始日志内容
+            var originalLogContent = document.getElementById('log-content').innerHTML;
+
+            // 创建临时显示内容
+            var tempContent = `
+        <div style="position: relative; min-height: 300px;">
+            <button onclick="window.showSection('log'); restoreLogContent();"
+                    style="position: absolute; top: 10px; right: 10px; padding: 8px 15px; 
+                           background-color: #2c2c2c; color: white; border: none; 
+                           border-radius: 4px; cursor: pointer;">返回</button>
+            <div style="color:white; padding:50px;">
+                <h2>【W2】盗贼更新日志</h2>
+                <p>内测中</p>
+    </div>
+ </div>
+    `;
+
+            // 隐藏所有内容区域
+            hideAllSections();
+
+            // 设置新内容
+            var contentDiv = document.getElementById('log-content');
+            contentDiv.innerHTML = tempContent;
+            contentDiv.classList.add('active');
+
+            // 添加恢复函数到window对象
+            window.restoreLogContent = function () {
+                document.getElementById('log-content').innerHTML = originalLogContent;
+            };
+        }
+
+        function showW20Log() {
+            // 保存原始日志内容
+            var originalLogContent = document.getElementById('log-content').innerHTML;
+
+            // 创建临时显示内容
+            var tempContent = `
+        <div style="position: relative; min-height: 300px;">
+            <button onclick="window.showSection('log'); restoreLogContent();"
+                    style="position: absolute; top: 10px; right: 10px; padding: 8px 15px; 
+                           background-color: #2c2c2c; color: white; border: none; 
+                           border-radius: 4px; cursor: pointer;">返回</button>
+            <div style="color:white; padding:50px;">
+                <h2>【W2】死骑更新日志</h2>
+                <p>内测中</p>
+    </div>
+ </div>
+    `;
+
+            // 隐藏所有内容区域
+            hideAllSections();
+
+            // 设置新内容
+            var contentDiv = document.getElementById('log-content');
+            contentDiv.innerHTML = tempContent;
+            contentDiv.classList.add('active');
+
+            // 添加恢复函数到window对象
+            window.restoreLogContent = function () {
+                document.getElementById('log-content').innerHTML = originalLogContent;
+            };
+        }
+    </script>
+</body>
+
+</html>
