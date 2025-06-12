@@ -13,6 +13,7 @@
             --accent-color: #ff0000;
             --light-bg: #ffffff;
             --border-color: #4e4e4e;
+
         }
 
         body {
@@ -28,6 +29,10 @@
             background-attachment: fixed;
             background-repeat: no-repeat;
             min-height: 100vh;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         /* 新增导航栏样式 */
@@ -327,7 +332,8 @@
         <h1>小羽一键宏</h1>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1、小羽一键宏（以下简称小羽）网站提供各类一键宏软件及插件的下载与更新等，仅供学习交流使用，禁止用于任何商业用途或非法用途。</p>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2、本网站中所提供的软件及插件著作权归软件作者所有，用户可以自由选择是否使用此软件及插件。</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3、如果用户下载、安装、使用本网站中所提供的软件及插件，即表明用户信任该软件作者，已对程序及插件具有清晰的认知，小羽对任何原因在使用软件及插件过程中可能对用户自己或他人造成的任何形式的损失和伤害不承担责任。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            3、如果用户下载、安装、使用本网站中所提供的软件及插件，即表明用户信任该软件作者，已对程序及插件具有清晰的认知，小羽对任何原因在使用软件及插件过程中可能对用户自己或他人造成的任何形式的损失和伤害不承担责任。</p>
         <h2>【W1】猪猪一键宏</h2>
         <li>支持全职业T和DPS</li>
         <li>副本特化功能</li>
@@ -668,102 +674,102 @@
 
     <script>
         // 显示详情页
-    function showDetail(programId) {
-        // 隐藏所有内容区域
-        hideAllSections();
-        // 隐藏所有详情页
-        var details = document.getElementsByClassName('detail-container');
-        for (var i = 0; i < details.length; i++) {
-            details[i].style.display = 'none';
+        function showDetail(programId) {
+            // 隐藏所有内容区域
+            hideAllSections();
+            // 隐藏所有详情页
+            var details = document.getElementsByClassName('detail-container');
+            for (var i = 0; i < details.length; i++) {
+                details[i].style.display = 'none';
+            }
+            // 显示选中的详情页
+            document.getElementById(programId + '-detail').style.display = 'block';
+            // 更新导航栏状态
+            updateNavActive('');
         }
-        // 显示选中的详情页
-        document.getElementById(programId + '-detail').style.display = 'block';
-        // 更新导航栏状态
-        updateNavActive('');
-    }
 
-    // 返回首页
-    function backToHome() {
-        // 隐藏所有详情页
-        var details = document.getElementsByClassName('detail-container');
-        for (var i = 0; i < details.length; i++) {
-            details[i].style.display = 'none';
+        // 返回首页
+        function backToHome() {
+            // 隐藏所有详情页
+            var details = document.getElementsByClassName('detail-container');
+            for (var i = 0; i < details.length; i++) {
+                details[i].style.display = 'none';
+            }
+            // 显示首页内容
+            showSection('home');
         }
-        // 显示首页内容
-        showSection('home');
-    }
 
-    // 显示内容区域
-    function showSection(sectionId) {
-        // 隐藏所有内容区域
-        hideAllSections();
-        // 显示选中的内容区域
-        document.getElementById(sectionId + '-content').classList.add('active');
-        // 更新导航栏活动状态
-        updateNavActive(sectionId);
-        // 隐藏所有详情页
-        var details = document.getElementsByClassName('detail-container');
-        for (var i = 0; i < details.length; i++) {
-            details[i].style.display = 'none';
+        // 显示内容区域
+        function showSection(sectionId) {
+            // 隐藏所有内容区域
+            hideAllSections();
+            // 显示选中的内容区域
+            document.getElementById(sectionId + '-content').classList.add('active');
+            // 更新导航栏活动状态
+            updateNavActive(sectionId);
+            // 隐藏所有详情页
+            var details = document.getElementsByClassName('detail-container');
+            for (var i = 0; i < details.length; i++) {
+                details[i].style.display = 'none';
+            }
+
+            // 强制重置内容到初始状态
+            resetSectionContent(sectionId);
         }
-        
+
         // 强制重置内容到初始状态
-        resetSectionContent(sectionId);
-    }
+        function resetSectionContent(sectionId) {
+            // 对于日志部分，恢复原始内容
+            if (sectionId === 'log') {
+                var logContent = document.getElementById('log-content');
+                if (logContent.innerHTML !== originalLogContent) {
+                    logContent.innerHTML = originalLogContent;
+                }
+            }
+            // 可以根据需要添加其他部分的重置逻辑
+        }
 
-    // 强制重置内容到初始状态
-    function resetSectionContent(sectionId) {
-        // 对于日志部分，恢复原始内容
-        if (sectionId === 'log') {
-            var logContent = document.getElementById('log-content');
-            if (logContent.innerHTML !== originalLogContent) {
-                logContent.innerHTML = originalLogContent;
+        // 保存日志原始内容
+        var originalLogContent = document.getElementById('log-content').innerHTML;
+
+        // 隐藏所有内容区域
+        function hideAllSections() {
+            var sections = document.getElementsByClassName('content-section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
             }
         }
-        // 可以根据需要添加其他部分的重置逻辑
-    }
 
-    // 保存日志原始内容
-    var originalLogContent = document.getElementById('log-content').innerHTML;
+        // 更新导航栏活动状态
+        function updateNavActive(activeId) {
+            var navItems = document.getElementsByClassName('nav-item');
+            for (var i = 0; i < navItems.length; i++) {
+                navItems[i].classList.remove('active');
+            }
+            // 设置当前活动项
+            if (activeId === 'home') {
+                navItems[0].classList.add('active');
+            } else if (activeId === 'price') {
+                navItems[1].classList.add('active');
+            } else if (activeId === 'download') {
+                navItems[2].classList.add('active');
+            } else if (activeId === 'log') {
+                navItems[3].classList.add('active');
+            } else if (activeId === 'tel') {
+                navItems[4].classList.add('active');
+            }
+        }
 
-    // 隐藏所有内容区域
-    function hideAllSections() {
-        var sections = document.getElementsByClassName('content-section');
-        for (var i = 0; i < sections.length; i++) {
-            sections[i].classList.remove('active');
+        // 初始化：只显示首页
+        window.onload = function () {
+            // 隐藏所有详情页
+            var details = document.getElementsByClassName('detail-container');
+            for (var i = 0; i < details.length; i++) {
+                details[i].style.display = 'none';
+            }
+            // 显示首页
+            showSection('home');
         }
-    }
-
-    // 更新导航栏活动状态
-    function updateNavActive(activeId) {
-        var navItems = document.getElementsByClassName('nav-item');
-        for (var i = 0; i < navItems.length; i++) {
-            navItems[i].classList.remove('active');
-        }
-        // 设置当前活动项
-        if (activeId === 'home') {
-            navItems[0].classList.add('active');
-        } else if (activeId === 'price') {
-            navItems[1].classList.add('active');
-        } else if (activeId === 'download') {
-            navItems[2].classList.add('active');
-        } else if (activeId === 'log') {
-            navItems[3].classList.add('active');
-        } else if (activeId === 'tel') {
-            navItems[4].classList.add('active');
-        }
-    }
-
-    // 初始化：只显示首页
-    window.onload = function () {
-        // 隐藏所有详情页
-        var details = document.getElementsByClassName('detail-container');
-        for (var i = 0; i < details.length; i++) {
-            details[i].style.display = 'none';
-        }
-        // 显示首页
-        showSection('home');
-    }
 
         // 显示更新日志
         function showW1Log() {
