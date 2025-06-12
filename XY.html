@@ -3486,16 +3486,20 @@
  </div>
     `;
 
+            // 隐藏所有内容区域
             hideAllSections();
 
+            // 设置新内容
             var contentDiv = document.getElementById('log-content');
             contentDiv.innerHTML = tempContent;
             contentDiv.classList.add('active');
 
+            // 添加恢复函数到window对象
             window.restoreLogContent = function () {
                 document.getElementById('log-content').innerHTML = originalLogContent;
             };
         }
     </script>
 </body>
+
 </html>
