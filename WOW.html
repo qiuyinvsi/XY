@@ -318,8 +318,6 @@
     <div class="navbar">
         <div class="nav-item active" onclick="showSection('home')">首页</div>
         <div class="nav-item" onclick="showSection('price')">价格列表</div>
-        <div class="nav-item" onclick="showSection('download')">插件下载</div>
-        <div class="nav-item" onclick="showSection('log')">更新日志</div>
         <div class="nav-item" onclick="showSection('jd')">WoWSims</div>
         <div class="nav-item" onclick="showSection('wcl')">计分规则</div>
         <div class="nav-item" onclick="showSection('html')">常用网站</div>
@@ -652,78 +650,7 @@
         </table>
     </div>
 
-    <!-- 新增下载内容 -->
-    <div class="content-section" id="download-content">
-        <h2>怀旧服/周年服</h2>
-        <div class="button-container">
-            <div class="program-button" onclick="window.open('https://wwey.lanzouu.com/b00ya5hwgb', '_blank')">
-                <h4>【W1】猪猪一键宏</h4>
-                <p>适用于怀旧服/周年服</p>
-            </div>
-            <div class="program-button" onclick="window.open('https://wwey.lanzouu.com/b00ya5hhdi', '_blank')">
-                <h4>【W2】小易循环助手</h4>
-                <p>适用于怀旧服/周年服</p>
-            </div>
-            <div class="program-button" onclick="window.open('https://wwey.lanzouu.com/b00ya5hjbi', '_blank')">
-                <h4>【W3】AutoHelp</h4>
-                <p>适用于怀旧服/周年服</p>
-            </div>
-            <div class="program-button" onclick="window.open('https://wwey.lanzouu.com/b00ya97wnc', '_blank')">
-                <h4>【W4】FK内存宏</h4>
-                <p>适用于怀旧服/周年服</p>
-            </div>
-            <div class="program-button" onclick="window.open('https://wwey.lanzouu.com/b00yabmmvc', '_blank')">
-                <h4>【W5】暮火阿尔法</h4>
-                <p>适用于怀旧服/周年服</p>
-            </div>
-        </div>
-        <h2>正式服</h2>
-        <div class="button-container">
 
-            <div class="program-button" onclick="window.open('https://wwey.lanzouu.com/b00ya5hlnc', '_blank')">
-                <h4>【Z1】HekiliAssist</h4>
-                <p>适用于正式服</p>
-            </div>
-            <div class="program-button" onclick="window.open('https://wwxf.lanzn.com/Thrilonekey', '_blank')">
-                <h4>【Z2】Think 雷鸡</h4>
-                <p>适用于正式服</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 新增更新日志 -->
-    <div class="content-section" id="log-content">
-        <h2>怀旧服/周年服</h2>
-        <div class="button-container">
-            <div class="program-button" onclick="window.open('https://qiuyinvsi.github.io/XY/W1.html', '_blank')">
-                <h4>【W1】猪猪一键宏</h4>
-            </div>
-            <div class="program-button" onclick="showW2Log()">
-                <h4>【W2】小易循环助手</h4>
-            </div>
-            <div class="program-button">
-                <h4>【W3】AutoHelp</h4>
-                <p>在线热修</p>
-            </div>
-            <div class="program-button">
-                <h4>【W4】FK内存宏</h4>
-                <p>在线热修</p>
-            </div>
-            <div class="program-button" onclick="window.open('https://qiuyinvsi.github.io/XY/W5.html', '_blank')">
-                <h4>【W5】暮火阿尔法</h4>
-            </div>
-        </div>
-        <h2>正式服</h2>
-        <div class="button-container">
-            <div class="program-button" onclick="window.open('https://github.com/Hekili/hekili/releases', '_blank')">
-                <h4>【Z1】HekiliAssist</h4>
-            </div>
-            <div class="program-button">
-                <h4>【Z2】Think 雷鸡</h4>
-                <p>在线热修</p>
-            </div>
-        </div>
-    </div>
 
     <div class="content-section" id="jd-content">
         <div class="button-container">
@@ -894,18 +821,14 @@
                 navItems[0].classList.add('active');
             } else if (activeId === 'price') {
                 navItems[1].classList.add('active');
-            } else if (activeId === 'download') {
-                navItems[2].classList.add('active');
-            } else if (activeId === 'log') {
-                navItems[3].classList.add('active');
             } else if (activeId === 'jd') {
-                navItems[4].classList.add('active');
+                navItems[2].classList.add('active');
             } else if (activeId === 'wcl') {
-                navItems[5].classList.add('active');
+                navItems[3].classList.add('active');
             } else if (activeId === 'html') {
-                navItems[6].classList.add('active');
+                navItems[4].classList.add('active');
             } else if (activeId === 'tel') {
-                navItems[7].classList.add('active');
+                navItems[5].classList.add('active');
             }
         }
 
